@@ -259,7 +259,7 @@ function initGenerator() {
 function initCalculator() {
   const sold = $<HTMLInputElement>("r-sold");
   const now = $<HTMLInputElement>("r-now");
-  const WITH_GESTAUTO = 15; // minuti per pratica con GestAuto: valore fisso di riferimento
+  const WITH_GESTAUTO = 5; // minuti per pratica con GestAuto: valore fisso di riferimento
   const fmt = (n: number) => (Math.round(n * 10) / 10).toLocaleString("it-IT");
   const shown = new Map<string, { value: number; token: number }>();
 
@@ -499,7 +499,7 @@ function initUi() {
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  document.querySelectorAll<HTMLElement>(".feature, .tile, .pack-card, .flow li, .link-card, .plan-life").forEach((c) => c.classList.add("spot"));
+  document.querySelectorAll<HTMLElement>(".feature, .tile, .pack-card, .flow li, .link-card, .plan-life, .next-card").forEach((c) => c.classList.add("spot"));
   document.addEventListener("pointermove", (e) => {
     const card = (e.target as HTMLElement).closest<HTMLElement>(".spot");
     if (!card) return;
@@ -520,7 +520,7 @@ function initUi() {
   titles.forEach((t) => splitWords(t));
 
   const targets = document.querySelectorAll<HTMLElement>(
-    ".section-head > :not(.h2), .block-title, .chips li, .site-note, .viewer, .pack-card, .flow li, .pack-note, .tile, .gen-panel, .gen-out, .range, .fixed-row, .calc-out, .stat, .feature, .cmp-head, .cmp-row, .steps li, .demo-copy > :not(.h2):not(.section-head), .form-card, .plan, .card-dark, .legal, .faq-item, .cta-box > :not(.h2)",
+    ".section-head > :not(.h2), .block-title, .chips li, .site-note, .viewer, .pack-card, .flow li, .pack-note, .tile, .gen-panel, .gen-out, .range, .fixed-row, .calc-out, .stat, .feature, .next-card, .cmp-head, .cmp-row, .steps li, .demo-copy > :not(.h2):not(.section-head), .form-card, .plan, .card-dark, .legal, .faq-item, .cta-box > :not(.h2)",
   );
   if (!("IntersectionObserver" in window)) {
     titles.forEach((t) => t.classList.add("in-view"));
