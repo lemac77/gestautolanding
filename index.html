@@ -64,8 +64,9 @@
         <figure class="duo-phone">
           <div class="phone phone-sm">
             <div class="phone-screen">
-              <div class="mini-hero" style="background-image: url('/sito/showroom.webp')"><span class="mini-kicker">Concessionaria multimarca a Vicenza</span><strong>Berica Motori</strong></div>
-              <div class="phone-list" id="duo-site"></div>
+              <div class="phone-scroll" tabindex="0" aria-label="Home del sito demo Berica Motori, scorrevole">
+                <img src="/sito/mob-home.webp" width="780" height="16000" alt="Home page del sito Berica Motori su smartphone" fetchpriority="low">
+              </div>
             </div>
           </div>
           <figcaption class="duo-tag duo-tag-site">Il sito web · lo vedono i clienti</figcaption>
@@ -129,20 +130,28 @@
       <p class="lead">Un sito professionale, veloce e progettato per smartphone, con il tuo logo, i tuoi colori e il dominio del tuo autosalone. Quando inserisci un veicolo nel gestionale, le informazioni vengono sincronizzate con il sito, senza dover aggiornare due sistemi separati.</p>
     </div>
 
-    <figure class="browser" aria-label="Anteprima del sito web demo di Berica Motori">
-      <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>bericamotori.it</span></div>
-      <div class="web">
-        <div class="web-nav"><strong>Berica Motori</strong><span>Parco auto · Usato garantito · Finanziamenti · Contatti</span></div>
-        <div class="web-hero" style="background-image: url('/sito/showroom.webp')">
-          <span class="web-kicker">Concessionaria multimarca a Vicenza</span>
-          <span class="web-title">Berica Motori <em>Vicenza</em></span>
-          <span class="web-sub">Usato selezionato, garanzia 12 mesi inclusa e finanziamenti su misura.</span>
-          <span class="web-cta">Scopri il parco auto</span>
+    <div class="viewer" id="viewer">
+      <div class="viewer-bar">
+        <div class="seg" role="group" aria-label="Pagina del sito">
+          <button type="button" class="seg-btn" data-page="home" aria-pressed="true">Home</button>
+          <button type="button" class="seg-btn" data-page="parco" aria-pressed="false">Parco auto</button>
+          <button type="button" class="seg-btn" data-page="scheda" aria-pressed="false">Scheda auto</button>
         </div>
-        <div class="web-cars" id="web-cars"></div>
+        <div class="seg" role="group" aria-label="Dispositivo">
+          <button type="button" class="seg-btn" data-device="desk" aria-pressed="true">Desktop</button>
+          <button type="button" class="seg-btn" data-device="mob" aria-pressed="false">Smartphone</button>
+        </div>
+        <button type="button" class="btn btn-accent viewer-live" id="viewer-live" aria-pressed="false">Naviga dal vivo</button>
       </div>
-      <figcaption class="small" style="color: var(--dim); margin-top: 14px">Il sito demo di Berica Motori, generato da GestAuto. <a href="https://motori-sito.vercel.app" target="_blank" rel="noopener">Visitalo ↗</a></figcaption>
-    </figure>
+      <figure class="viewer-frame" id="viewer-frame" data-device="desk">
+        <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span id="viewer-url">bericamotori.it</span></div>
+        <div class="viewer-scroll" id="viewer-scroll" tabindex="0" aria-label="Anteprima del sito, scorrevole">
+          <img id="viewer-img" src="/sito/desk-home.webp" width="1280" height="7230" loading="lazy" alt="Home page del sito Berica Motori">
+        </div>
+        <div class="viewer-hint" id="viewer-hint" aria-hidden="true">Scorri dentro l'anteprima ↓</div>
+      </figure>
+      <p class="small" style="color: var(--dim)">Schermate del sito demo Berica Motori, con i dati di esempio del gestionale. Con "Naviga dal vivo" lo usi direttamente qui, oppure <a href="https://motori-sito.vercel.app" target="_blank" rel="noopener">aprilo in una nuova scheda ↗</a></p>
+    </div>
 
     <div class="site-row">
       <div class="site-copy">
@@ -156,16 +165,6 @@
       </ul>
         <p style="margin: 0; font-weight: 600">Un solo inserimento. Il gestionale e il tuo sito lavorano insieme.</p>
       </div>
-    <div class="phone-wrap">
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="phone-bar"><span>Berica Motori</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
-          <div class="filters" id="filters" role="group" aria-label="Filtra per alimentazione"></div>
-          <div class="phone-count" id="phone-count" aria-live="polite"></div>
-          <div class="phone-list" id="phone-list"></div>
-        </div>
-      </div>
-    </div>
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 20px">

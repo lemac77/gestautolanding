@@ -46,19 +46,6 @@ function paint(node: HTMLElement, car: Car) {
 const year = (c: Car) => c.year.split("/")[1];
 
 /* ---------- Anteprime: gestionale e sito ---------- */
-function phoneCard(car: Car) {
-  const card = el("div", { class: "phone-card" });
-  const img = el("div", { class: "img", "aria-hidden": "true" });
-  paint(img, car);
-  img.append(el("span", { class: "fuel" }, car.fuel));
-  const body = el("div", { class: "body" });
-  const left = el("div", {});
-  left.append(el("div", { class: "name" }, car.name), el("div", { class: "car-meta" }, `${year(car)} · ${car.km}`));
-  body.append(left, el("div", { class: "price" }, car.price));
-  card.append(img, body);
-  return card;
-}
-
 function initPreviews() {
   // Gestionale: lista del parco auto con lo stato di pubblicazione
   const list = $("mock-cars");
@@ -74,22 +61,6 @@ function initPreviews() {
     list.append(row);
   }
 
-  // Sito nel telefono dell'hero: le stesse auto "Sul sito"
-  $("duo-site").append(phoneCard(CARS[0]), phoneCard(CARS[2]));
-
-  // Sito in versione desktop
-  const web = $("web-cars");
-  for (const car of [CARS[1], CARS[4], CARS[6], CARS[3]]) {
-    const card = el("div", { class: "web-car" });
-    const img = el("div", { class: "img", "aria-hidden": "true" });
-    paint(img, car);
-    const body = el("div", { class: "body" });
-    const row = el("div", { class: "row" });
-    row.append(el("span", { class: "car-meta" }, `${year(car)} · ${car.km} · ${car.fuel}`), el("span", { class: "price" }, car.price));
-    body.append(el("div", { class: "name" }, car.name), row);
-    card.append(img, body);
-    web.append(card);
-  }
 }
 
 /* ---------- Generatore contratti ---------- */
@@ -160,25 +131,65 @@ function initCalculator() {
   update();
 }
 
-/* ---------- Filtri del telefono ---------- */
-function initPhone() {
-  const filters = ["Tutte", "Ibrida", "Diesel", "Benzina", "Elettrica"];
-  let active = "Tutte";
-  const box = $("filters");
-  const btns = filters.map((f) => {
-    const b = el("button", { type: "button", class: "filter", "aria-pressed": String(f === active) }, f);
-    b.addEventListener("click", () => { active = f; render(); });
-    box.append(b);
-    return b;
-  });
-  const list = $("phone-list");
+/* ---------- Visualizzatore del sito vero ---------- */
+const SITE = "https://motori-sito.vercel.app";
+const SITE_PAGES = {
+  home: { path: "/", label: "Home page", h: { desk: 7230, mob: 16000 } },
+  parco: { path: "/parco-auto", label: "Pagina del parco auto", h: { desk: 2283, mob: 11720 } },
+  scheda: { path: "/parco-auto/00000000-0000-4000-8000-000000000001", label: "Scheda della Volkswagen Golf", h: { desk: 3492, mob: 12406 } },
+} as const;
+type SitePage = keyof typeof SITE_PAGES;
+type Device = "desk" | "mob";
+
+function initViewer() {
+  const frame = $("viewer-frame");
+  const scroll = $("viewer-scroll");
+  const url = $("viewer-url");
+  const hint = $("viewer-hint");
+  const liveBtn = $<HTMLButtonElement>("viewer-live");
+  const pageBtns = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-page]"));
+  const devBtns = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-device]"));
+  let page: SitePage = "home";
+  let device: Device = "desk";
+  let live = false;
+
+  scroll.addEventListener("scroll", () => hint.classList.add("is-gone"), { passive: true });
+
   function render() {
-    btns.forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === active)));
-    const items = CARS.filter((c) => c.status === "Online" && (active === "Tutte" || c.fuel === active));
-    $("phone-count").textContent = `${items.length} ${items.length === 1 ? "auto disponibile" : "auto disponibili"}`;
-    list.replaceChildren(...items.map(phoneCard));
+    const info = SITE_PAGES[page];
+    pageBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.page === page)));
+    devBtns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.device === device)));
+    liveBtn.setAttribute("aria-pressed", String(live));
+    liveBtn.textContent = live ? "Torna alle schermate" : "Naviga dal vivo";
+    frame.dataset.device = device;
+    url.textContent = "bericamotori.it" + (info.path === "/" ? "" : info.path.replace(/\/0+-.*$/, "/volkswagen-golf"));
+
+    if (live) {
+      const iframe = el("iframe", {
+        src: SITE + info.path,
+        title: "Sito demo Berica Motori, navigabile",
+        loading: "lazy",
+        referrerpolicy: "no-referrer",
+      });
+      scroll.replaceChildren(iframe);
+      hint.classList.add("is-gone");
+      return;
+    }
+    const img = el("img", {
+      src: `/sito/${device}-${page}.webp`,
+      width: device === "desk" ? "1280" : "780",
+      height: String(info.h[device]),
+      alt: `${info.label} del sito Berica Motori, versione ${device === "desk" ? "desktop" : "smartphone"}`,
+      decoding: "async",
+    });
+    scroll.replaceChildren(img);
+    scroll.scrollTop = 0;
+    hint.classList.remove("is-gone");
   }
-  render();
+
+  pageBtns.forEach((b) => b.addEventListener("click", () => { page = b.dataset.page as SitePage; render(); }));
+  devBtns.forEach((b) => b.addEventListener("click", () => { device = b.dataset.device as Device; render(); }));
+  liveBtn.addEventListener("click", () => { live = !live; render(); });
 }
 
 /* ---------- FAQ ---------- */
@@ -244,6 +255,6 @@ function initForm() {
 initPreviews();
 initGenerator();
 initCalculator();
-initPhone();
+initViewer();
 initFaq();
 initForm();
