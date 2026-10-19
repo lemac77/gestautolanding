@@ -45,27 +45,22 @@ function paint(node: HTMLElement, car: Car) {
 
 const year = (c: Car) => c.year.split("/")[1];
 
-/* ---------- Anteprima con tab ---------- */
-function initTabs() {
-  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
-  const select = (tab: HTMLButtonElement) => {
-    for (const t of tabs) {
-      const on = t === tab;
-      t.setAttribute("aria-selected", String(on));
-      t.tabIndex = on ? 0 : -1;
-      $(t.getAttribute("aria-controls")!).hidden = !on;
-    }
-  };
-  tabs.forEach((tab, i) => {
-    tab.addEventListener("click", () => select(tab));
-    tab.addEventListener("keydown", (e) => {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-      const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
-      select(next);
-      next.focus();
-    });
-  });
+/* ---------- Anteprime: gestionale e sito ---------- */
+function phoneCard(car: Car) {
+  const card = el("div", { class: "phone-card" });
+  const img = el("div", { class: "img", "aria-hidden": "true" });
+  paint(img, car);
+  img.append(el("span", { class: "fuel" }, car.fuel));
+  const body = el("div", { class: "body" });
+  const left = el("div", {});
+  left.append(el("div", { class: "name" }, car.name), el("div", { class: "car-meta" }, `${year(car)} · ${car.km}`));
+  body.append(left, el("div", { class: "price" }, car.price));
+  card.append(img, body);
+  return card;
+}
 
+function initPreviews() {
+  // Gestionale: lista del parco auto con lo stato di pubblicazione
   const list = $("mock-cars");
   for (const car of [CARS[0], CARS[2], CARS[4], CARS[6], CARS[7]]) {
     const row = el("div", { class: "car-row" });
@@ -74,19 +69,26 @@ function initTabs() {
     const info = el("div", { class: "info" });
     info.append(el("div", { class: "car-name" }, car.name), el("div", { class: "car-meta" }, `${year(car)} · ${car.km}`));
     const pillClass = car.status === "Online" ? "pill-online" : car.status === "Venduta" ? "pill-sold" : "pill-draft";
-    row.append(thumb, info, el("div", { class: "car-price" }, car.price), el("span", { class: `pill ${pillClass}` }, car.status));
+    const label = car.status === "Online" ? "Sul sito" : car.status;
+    row.append(thumb, info, el("div", { class: "car-price" }, car.price), el("span", { class: `pill ${pillClass}` }, label));
     list.append(row);
   }
 
-  const site = $("mock-site");
-  for (const car of CARS.filter((c) => c.status === "Online").slice(0, 2)) {
-    const card = el("div", { class: "site-card" });
+  // Sito nel telefono dell'hero: le stesse auto "Sul sito"
+  $("duo-site").append(phoneCard(CARS[0]), phoneCard(CARS[2]));
+
+  // Sito in versione desktop
+  const web = $("web-cars");
+  for (const car of [CARS[1], CARS[4], CARS[6], CARS[3]]) {
+    const card = el("div", { class: "web-car" });
     const img = el("div", { class: "img", "aria-hidden": "true" });
     paint(img, car);
     const body = el("div", { class: "body" });
-    body.append(el("div", { class: "car-name" }, car.name), el("div", { class: "car-meta" }, `${year(car)} · ${car.km}`), el("div", { class: "price" }, car.price));
+    const row = el("div", { class: "row" });
+    row.append(el("span", { class: "car-meta" }, `${year(car)} · ${car.km} · ${car.fuel}`), el("span", { class: "price" }, car.price));
+    body.append(el("div", { class: "name" }, car.name), row);
     card.append(img, body);
-    site.append(card);
+    web.append(card);
   }
 }
 
@@ -174,18 +176,7 @@ function initPhone() {
     btns.forEach((b) => b.setAttribute("aria-pressed", String(b.textContent === active)));
     const items = CARS.filter((c) => c.status === "Online" && (active === "Tutte" || c.fuel === active));
     $("phone-count").textContent = `${items.length} ${items.length === 1 ? "auto disponibile" : "auto disponibili"}`;
-    list.replaceChildren(...items.map((car) => {
-      const card = el("div", { class: "phone-card" });
-      const img = el("div", { class: "img", "aria-hidden": "true" });
-      paint(img, car);
-      img.append(el("span", { class: "fuel" }, car.fuel));
-      const body = el("div", { class: "body" });
-      const left = el("div", {});
-      left.append(el("div", { class: "name" }, car.name), el("div", { class: "car-meta" }, `${year(car)} · ${car.km}`));
-      body.append(left, el("div", { class: "price" }, car.price));
-      card.append(img, body);
-      return card;
-    }));
+    list.replaceChildren(...items.map(phoneCard));
   }
   render();
 }
@@ -250,7 +241,7 @@ function initForm() {
   });
 }
 
-initTabs();
+initPreviews();
 initGenerator();
 initCalculator();
 initPhone();

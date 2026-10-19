@@ -23,7 +23,7 @@
     <nav class="nav-links" aria-label="Principale">
       <a href="#demo">Prova la demo</a>
       <a href="#funzionalita">Funzionalità</a>
-      <a href="#sito">Sito web</a>
+      <a href="#sito">Sito web incluso</a>
       <a href="#prezzi">Prezzi</a>
       <a href="#faq">FAQ</a>
       <a href="#demo" class="btn btn-light">Prova la demo</a>
@@ -37,7 +37,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="hero-copy">
-      <p class="eyebrow">Il gestionale per autosaloni</p>
+      <p class="eyebrow">Gestionale + sito web per autosaloni</p>
       <h1 class="h1">Gestisci meno pratiche. Vendi più auto.</h1>
       <p class="lead">Parco auto, fotografie, contratti e sito web. Tutto in un unico sistema, senza inserire gli stessi dati più volte. Carichi un'auto, gestisci i documenti e la pubblichi online. GestAuto tiene tutto collegato.</p>
       <div class="btn-row">
@@ -48,40 +48,139 @@
     </div>
 
     <div class="hero-mock">
-      <div class="tabs" role="tablist" aria-label="Anteprima di GestAuto">
-        <button class="tab" role="tab" id="tab-auto" aria-controls="panel-auto" aria-selected="true">Parco auto</button>
-        <button class="tab" role="tab" id="tab-doc" aria-controls="panel-doc" aria-selected="false" tabindex="-1">Contratti</button>
-        <button class="tab" role="tab" id="tab-sito" aria-controls="panel-sito" aria-selected="false" tabindex="-1">Sito web</button>
-      </div>
-      <div class="device">
-        <div class="screen">
-          <div class="panel" role="tabpanel" id="panel-auto" aria-labelledby="tab-auto">
-            <div class="panel-head"><span class="panel-title">Parco auto</span><span class="chip-accent">+ Nuova auto</span></div>
-            <div class="choice-list" id="mock-cars"></div>
-          </div>
-          <div class="panel" role="tabpanel" id="panel-doc" aria-labelledby="tab-doc" hidden>
-            <span class="panel-title">Documenti</span>
-            <div class="doc-grid">
-              <div class="doc-card">Contratto vendita<small>PDF · numerato</small></div>
-              <div class="doc-card">Contratto acquisto<small>PDF · numerato</small></div>
-              <div class="doc-card">Certificato conformità<small>PDF · numerato</small></div>
-              <div class="doc-card">Scheda permuta<small>PDF · numerato</small></div>
+      <div class="duo" aria-label="Anteprima: il gestionale e il sito web di Berica Motori">
+        <figure class="duo-laptop">
+          <figcaption class="duo-tag">Il gestionale · lo usi tu</figcaption>
+          <div class="device">
+            <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>gestionale · Berica Motori</span></div>
+            <div class="screen">
+              <div class="panel">
+                <div class="panel-head"><span class="panel-title">Parco auto</span><span class="chip-accent">+ Nuova auto</span></div>
+                <div class="choice-list" id="mock-cars"></div>
+              </div>
             </div>
-            <div class="doc-last">Ultimo: Contratto vendita n. 2026/041</div>
           </div>
-          <div role="tabpanel" id="panel-sito" aria-labelledby="tab-sito" hidden>
-            <div class="site-bar"><strong>Berica Motori</strong><span>Auto · Chi siamo · Contatti</span></div>
-            <div class="site-grid" id="mock-site"></div>
+        </figure>
+        <figure class="duo-phone">
+          <div class="phone phone-sm">
+            <div class="phone-screen">
+              <div class="mini-hero" style="background-image: url('/sito/showroom.webp')"><span class="mini-kicker">Concessionaria multimarca a Vicenza</span><strong>Berica Motori</strong></div>
+              <div class="phone-list" id="duo-site"></div>
+            </div>
           </div>
-        </div>
+          <figcaption class="duo-tag duo-tag-site">Il sito web · lo vedono i clienti</figcaption>
+        </figure>
+        <div class="duo-sync"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.7L20 8M20 4v4h-4M20 12a8 8 0 0 1-13.7 5.7L4 16M4 20v-4h4"/></svg>Sincronizzati in automatico</div>
       </div>
     </div>
   </div>
 </section>
 
 <div class="strip" aria-hidden="true">
-  <div class="wrap"><span>Parco auto</span><span>Contratti PDF</span><span>Permute</span><span>Fotografie organizzate</span><span>Pubblicazione automatica</span><span>Richieste clienti</span><span>SEO</span></div>
+  <div class="wrap"><span>Gestionale</span><span>Sito web incluso</span><span>Parco auto</span><span>Contratti PDF</span><span>Permute</span><span>Fotografie organizzate</span><span>Pubblicazione automatica</span><span>Richieste clienti</span><span>SEO</span></div>
 </div>
+
+<!-- PACCHETTO -->
+<section class="section pack">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Due strumenti, un solo sistema</p>
+      <h2 class="h2">Non solo un gestionale. Anche il tuo sito.</h2>
+      <p class="lead">Con GestAuto hai sia il gestionale per lavorare in salone sia il sito web dove i clienti trovano le tue auto. Sono collegati: quello che inserisci nel gestionale compare sul sito, senza fare il lavoro due volte.</p>
+    </div>
+    <div class="pack-grid">
+      <article class="pack-card">
+        <span class="pack-for">Per te e il tuo team</span>
+        <h3>Il gestionale</h3>
+        <p>Dove lavori ogni giorno: parco auto, fotografie, contratti, permute, richieste e scadenze.</p>
+        <ul class="checks">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Schede auto con foto e stato di vendita</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Contratti PDF compilati e numerati</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Richieste dei clienti in un unico pannello</li>
+        </ul>
+      </article>
+      <div class="pack-link" aria-hidden="true"><span>+</span></div>
+      <article class="pack-card pack-card-site">
+        <span class="pack-for">Per i tuoi clienti</span>
+        <h3>Il sito web</h3>
+        <p>Dove i clienti trovano le tue auto a qualsiasi ora, da smartphone o computer, e ti contattano.</p>
+        <ul class="checks">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Parco auto online, sempre aggiornato</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Sul tuo dominio, con logo e colori tuoi</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Richieste di informazioni, test drive e permute</li>
+        </ul>
+      </article>
+    </div>
+    <ol class="flow">
+      <li><span class="flow-n">1</span><strong>Inserisci l'auto nel gestionale</strong><span>Dati, prezzo e fotografie, una volta sola.</span></li>
+      <li><span class="flow-n">2</span><strong>GestAuto la sincronizza</strong><span>Nessun secondo inserimento, nessun copia e incolla.</span></li>
+      <li><span class="flow-n">3</span><strong>È online sul tuo sito</strong><span>Quando la vendi, sparisce dalla vetrina da sola.</span></li>
+    </ol>
+    <p class="pack-note">Il sito è incluso in tutti i piani: non lo paghi a parte.</p>
+  </div>
+</section>
+
+<!-- SITO WEB -->
+<section id="sito" class="section dark-2 site">
+  <div class="wrap site-stack">
+    <div class="section-head">
+      <p class="eyebrow">Gestionale + sito web</p>
+      <h2 class="h2">Il tuo parco auto online. Sempre aggiornato.</h2>
+      <p class="lead">Un sito professionale, veloce e progettato per smartphone, con il tuo logo, i tuoi colori e il dominio del tuo autosalone. Quando inserisci un veicolo nel gestionale, le informazioni vengono sincronizzate con il sito, senza dover aggiornare due sistemi separati.</p>
+    </div>
+
+    <figure class="browser" aria-label="Anteprima del sito web demo di Berica Motori">
+      <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>bericamotori.it</span></div>
+      <div class="web">
+        <div class="web-nav"><strong>Berica Motori</strong><span>Parco auto · Usato garantito · Finanziamenti · Contatti</span></div>
+        <div class="web-hero" style="background-image: url('/sito/showroom.webp')">
+          <span class="web-kicker">Concessionaria multimarca a Vicenza</span>
+          <span class="web-title">Berica Motori <em>Vicenza</em></span>
+          <span class="web-sub">Usato selezionato, garanzia 12 mesi inclusa e finanziamenti su misura.</span>
+          <span class="web-cta">Scopri il parco auto</span>
+        </div>
+        <div class="web-cars" id="web-cars"></div>
+      </div>
+      <figcaption class="small" style="color: var(--dim); margin-top: 14px">Il sito demo di Berica Motori, generato da GestAuto. <a href="https://motori-sito.vercel.app" target="_blank" rel="noopener">Visitalo ↗</a></figcaption>
+    </figure>
+
+    <div class="site-row">
+      <div class="site-copy">
+        <h3 style="margin: 0; font-size: 22px; font-weight: 600">Cosa trovano i tuoi clienti</h3>
+        <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Ricerca delle auto con filtri per prezzo e alimentazione</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Schede veicolo con fotografie, caratteristiche e richiesta informazioni</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Struttura ottimizzata per i motori di ricerca</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Statistiche per monitorare le visite al sito</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Recensioni dei clienti in evidenza</li>
+      </ul>
+        <p style="margin: 0; font-weight: 600">Un solo inserimento. Il gestionale e il tuo sito lavorano insieme.</p>
+      </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-bar"><span>Berica Motori</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
+          <div class="filters" id="filters" role="group" aria-label="Filtra per alimentazione"></div>
+          <div class="phone-count" id="phone-count" aria-live="polite"></div>
+          <div class="phone-list" id="phone-list"></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <h3 style="margin: 0; font-size: 22px; font-weight: 600">E in più, già pronti sul sito</h3>
+      <div class="site-tiles">
+        <article class="site-tile"><span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4zM8 8h8M8 12h2M12 12h2M16 12h0M8 16h2M12 16h2M16 16h0"/></svg></span><h3>Calcolo della rata</h3><p>Il cliente simula il finanziamento direttamente dalla scheda dell'auto.</p></article>
+        <article class="site-tile"><span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v3M17 3v3M4 8h16M5 5h14v15H5zM9 13l2 2 4-4"/></svg></span><h3>Prenotazione test drive</h3><p>Richiesta di prova con data e auto già indicate, dritta nel gestionale.</p></article>
+        <article class="site-tile"><span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></span><h3>Valutazione della permuta</h3><p>Il cliente descrive la sua auto e tu ricevi la richiesta pronta da valutare.</p></article>
+        <article class="site-tile"><span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg></span><h3>WhatsApp e chiamata in un tocco</h3><p>Pulsanti sempre visibili su smartphone per contattarti subito.</p></article>
+        <article class="site-tile"><span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6zM9 12l2 2 4-4"/></svg></span><h3>Garanzia e usato garantito</h3><p>Pagine dedicate che spiegano cosa offri e rassicurano chi compra.</p></article>
+        <article class="site-tile"><span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4zM4 15l4-4 4 4 3-3 5 5"/></svg></span><h3>Galleria dello showroom</h3><p>Le foto del tuo salone, per farti scegliere prima ancora della visita.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- GENERATORE -->
 <section id="prova" class="section">
@@ -210,35 +309,6 @@
   </div>
 </section>
 
-<!-- SITO WEB -->
-<section id="sito" class="section dark-2 site">
-  <div class="wrap">
-    <div class="site-copy">
-      <p class="eyebrow">Gestionale + sito web</p>
-      <h2 class="h2">Il tuo parco auto online. Sempre aggiornato.</h2>
-      <p class="lead">Un sito professionale, veloce e progettato per smartphone, con il tuo logo, i tuoi colori e il dominio del tuo autosalone. Quando inserisci un veicolo nel gestionale, le informazioni vengono sincronizzate con il sito, senza dover aggiornare due sistemi separati.</p>
-      <ul class="checks">
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Ricerca delle auto con filtri per prezzo e alimentazione</li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Schede veicolo con fotografie, caratteristiche e richiesta informazioni</li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Struttura ottimizzata per i motori di ricerca</li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Statistiche per monitorare le visite al sito</li>
-        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Recensioni dei clienti in evidenza</li>
-      </ul>
-      <p style="margin: 0; font-weight: 600">Un solo inserimento. Il gestionale e il tuo sito lavorano insieme.</p>
-    </div>
-    <div class="phone-wrap">
-      <div class="phone">
-        <div class="phone-screen">
-          <div class="phone-bar"><span>Berica Motori</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
-          <div class="filters" id="filters" role="group" aria-label="Filtra per alimentazione"></div>
-          <div class="phone-count" id="phone-count" aria-live="polite"></div>
-          <div class="phone-list" id="phone-list"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PRIMA E DOPO -->
 <section class="section">
   <div class="wrap">
@@ -347,7 +417,7 @@
 
     <div class="plans">
       <article class="plan plan-life">
-        <div class="plan-top"><h3 class="plan-name">Piano mensile</h3></div>
+        <div class="plan-top"><h3 class="plan-name">Piano mensile</h3><span class="tag">Gestionale + sito web</span></div>
         <div class="price"><strong>79 €</strong><span>/ mese</span></div>
         <p>Per chi preferisce distribuire il costo nel tempo.</p>
         <div class="price-line"><span>Attivazione iniziale</span><strong>590 € una tantum</strong></div>
@@ -364,7 +434,7 @@
       </article>
 
       <article class="plan plan-main">
-        <div class="plan-top"><h3 class="plan-name">Piano annuale</h3></div>
+        <div class="plan-top"><h3 class="plan-name">Piano annuale</h3><span class="tag">Gestionale + sito web</span></div>
         <div class="price"><strong>869 €</strong><span>/ anno</span></div>
         <p style="margin: 0; font-weight: 700">Risparmi 79 € rispetto al pagamento mensile.</p>
         <p style="margin: 0; line-height: 1.6; color: var(--ink-2)">Tutte le funzionalità del piano mensile, con pagamento anticipato annuale.</p>
@@ -373,7 +443,7 @@
       </article>
 
       <article class="plan plan-life">
-        <div class="plan-top"><h3 class="plan-name">Licenza senza canone software</h3></div>
+        <div class="plan-top"><h3 class="plan-name">Licenza senza canone software</h3><span class="tag">Gestionale + sito web</span></div>
         <div class="price"><strong>2.590 €</strong><span>una tantum</span></div>
         <p style="font-weight: 700; color: var(--text)">Attivazione inclusa.</p>
         <p>La licenza viene acquistata una volta sola, senza un canone software ricorrente.</p>
