@@ -34,8 +34,13 @@ Per provare anche il form in locale serve la Vercel CLI: `npx vercel dev`.
 - Nella pagina di login del gestionale demo le credenziali non devono essere precompilate.
 - Limite di 3 richieste ogni 24 ore per indirizzo email e campo trappola per i bot.
 
+## Pagine legali
+
+`/privacy`, `/cookie` e `/condizioni` sono in `privacy/`, `cookie/`, `condizioni/`.
+I font sono serviti dal dominio stesso (pacchetti Fontsource), quindi nessun dato dei visitatori va a Google Fonts: se aggiungi analytics, mappe o video esterni aggiorna Cookie Policy e privacy e valuta un banner di consenso.
+
 ## Da completare
 
-- Pagine `/privacy`, `/cookie` e `/condizioni` (i link nel footer e nel form puntano lì)
-- P. IVA, email e telefono nel footer
-- Foto vere delle auto: metterle in `public/auto/` e collegarle con il campo `img` in `src/main.ts`
+- Segnaposto tra parentesi quadre: indirizzo, P. IVA, email, telefono, area dei server Supabase, durata minima e preavvisi nelle condizioni
+- Far rivedere privacy e condizioni da un professionista prima del lancio
+- Foto delle auto: in `public/auto/`, prese da `lemac77/motori` (`brand/auto-demo/`) e ridimensionate

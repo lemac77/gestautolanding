@@ -1,5 +1,6 @@
 // Interazioni della landing GestAuto: anteprime, generatore contratti,
 // calcolatore, filtri del sito demo, FAQ e form di richiesta demo.
+import "./fonts";
 
 type Car = {
   name: string;
@@ -7,21 +8,23 @@ type Car = {
   km: string;
   plate: string;
   price: string;
-  fuel: "Benzina" | "Diesel" | "Ibrida";
+  fuel: "Benzina" | "Diesel" | "Ibrida" | "Elettrica";
   status: "Online" | "Venduta" | "Bozza";
   tone: string;
   img?: string;
 };
 
-// Auto di esempio. Quando avremo l'export del parco auto della demo Berica Motori,
-// basta riempire "img" con il percorso della foto in /public/auto/.
+// Parco auto della demo Berica Motori: stessi dati e stesse foto del seed
+// in lemac77/motori (gestionale/sql/demo-setup.sql, brand/auto-demo/).
 const CARS: Car[] = [
-  { name: "Volkswagen Golf 1.5 TSI", year: "03/2021", km: "48.000 km", plate: "GE 482 KL", price: "€ 19.900", fuel: "Benzina", status: "Online", tone: "#9AA0A8" },
-  { name: "Fiat 500 Hybrid Dolcevita", year: "06/2022", km: "21.000 km", plate: "GH 115 TR", price: "€ 14.500", fuel: "Ibrida", status: "Online", tone: "#D9D6CE" },
-  { name: "Audi A3 Sportback 35 TDI", year: "09/2020", km: "76.000 km", plate: "FZ 903 MB", price: "€ 22.800", fuel: "Diesel", status: "Venduta", tone: "#2B2E33" },
-  { name: "Toyota Yaris Cross Hybrid", year: "02/2023", km: "12.000 km", plate: "GN 371 ZA", price: "€ 25.400", fuel: "Ibrida", status: "Online", tone: "#8F1D17" },
-  { name: "BMW Serie 1 118d", year: "11/2021", km: "55.000 km", plate: "GF 640 PX", price: "€ 23.900", fuel: "Diesel", status: "Online", tone: "#1F3550" },
-  { name: "Renault Clio TCe 90", year: "04/2022", km: "30.000 km", plate: "GJ 208 LD", price: "€ 13.200", fuel: "Benzina", status: "Bozza", tone: "#C46A1E" },
+  { name: "Volkswagen Golf 1.5 eTSI Life", year: "03/2022", km: "34.100 km", plate: "GA 123 BM", price: "€ 24.900", fuel: "Ibrida", status: "Online", tone: "#8E9298", img: "/auto/auto-01.webp" },
+  { name: "Jeep Compass 4xe Limited", year: "06/2021", km: "41.200 km", plate: "GB 456 BM", price: "€ 27.900", fuel: "Ibrida", status: "Online", tone: "#D9D6CE", img: "/auto/auto-02.webp" },
+  { name: "Fiat 500e Icon", year: "09/2023", km: "14.500 km", plate: "GE 789 BM", price: "€ 18.900", fuel: "Elettrica", status: "Online", tone: "#7FA7C9", img: "/auto/auto-03.webp" },
+  { name: "Audi A3 Sportback 30 TDI S line", year: "04/2021", km: "58.000 km", plate: "GC 321 BM", price: "€ 25.900", fuel: "Diesel", status: "Online", tone: "#2B2E33", img: "/auto/auto-04.webp" },
+  { name: "Toyota Yaris Cross Hybrid Lounge", year: "02/2023", km: "18.200 km", plate: "GF 654 BM", price: "€ 23.900", fuel: "Ibrida", status: "Online", tone: "#8F1D17", img: "/auto/auto-05.webp" },
+  { name: "Peugeot 2008 PureTech Allure Pack", year: "05/2022", km: "29.400 km", plate: "GD 987 BM", price: "€ 20.500", fuel: "Benzina", status: "Online", tone: "#6E7277", img: "/auto/auto-06.webp" },
+  { name: "Mercedes-Benz Classe A 180 d Sport", year: "10/2021", km: "52.000 km", plate: "GA 555 BM", price: "€ 28.900", fuel: "Diesel", status: "Online", tone: "#B8BCC2", img: "/auto/auto-07.webp" },
+  { name: "Alfa Romeo Giulia 2.2 Veloce", year: "07/2022", km: "43.500 km", plate: "GB 222 BM", price: "€ 34.900", fuel: "Diesel", status: "Bozza", tone: "#8F1D17", img: "/auto/auto-08.webp" },
 ];
 
 const DOCS = ["Contratto vendita", "Contratto acquisto", "Certificato conformità", "Scheda permuta"];
@@ -64,7 +67,7 @@ function initTabs() {
   });
 
   const list = $("mock-cars");
-  for (const car of CARS.slice(0, 5)) {
+  for (const car of [CARS[0], CARS[2], CARS[4], CARS[6], CARS[7]]) {
     const row = el("div", { class: "car-row" });
     const thumb = el("div", { class: "car-thumb", "aria-hidden": "true" });
     paint(thumb, car);
@@ -89,7 +92,7 @@ function initTabs() {
 
 /* ---------- Generatore contratti ---------- */
 function initGenerator() {
-  const cars = [CARS[0], CARS[3], CARS[4]];
+  const cars = [CARS[0], CARS[4], CARS[6]];
   let carIdx = 0;
   let docIdx = 0;
   let counter = 41;
@@ -157,7 +160,7 @@ function initCalculator() {
 
 /* ---------- Filtri del telefono ---------- */
 function initPhone() {
-  const filters = ["Tutte", "Benzina", "Diesel", "Ibrida"];
+  const filters = ["Tutte", "Ibrida", "Diesel", "Benzina", "Elettrica"];
   let active = "Tutte";
   const box = $("filters");
   const btns = filters.map((f) => {

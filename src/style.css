@@ -19,7 +19,7 @@
   --accent: #D7261E;
   --accent-deep: #2A1210;
   --error: #B42318;
-  --display: "Archivo", "Arial Narrow", sans-serif;
+  --display: "Archivo Variable", "Archivo", "Arial Narrow", sans-serif;
   --body: "Instrument Sans", "Helvetica Neue", Helvetica, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
 }
