@@ -88,24 +88,74 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const demoEmail = process.env.DEMO_EMAIL as string;
   const demoPassword = process.env.DEMO_PASSWORD as string;
 
-  const visitorHtml = `
-  <div style="font-family:Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#111317">
-    <h1 style="font-size:22px;margin:0 0 16px">Ciao ${esc(nome)}, ecco le chiavi della demo</h1>
-    <p style="font-size:15px;line-height:1.6">Grazie per l'interesse in GestAuto. Puoi provare il gestionale come se fosse quello di ${esc(salone)}: carica auto, genera contratti, prova tutto.</p>
-    <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:15px">
-      <tr><td style="padding:10px;border:1px solid #DDE0E4;color:#4B5059">Email</td><td style="padding:10px;border:1px solid #DDE0E4;font-family:monospace"><strong>${esc(demoEmail)}</strong></td></tr>
-      <tr><td style="padding:10px;border:1px solid #DDE0E4;color:#4B5059">Password</td><td style="padding:10px;border:1px solid #DDE0E4;font-family:monospace"><strong>${esc(demoPassword)}</strong></td></tr>
-    </table>
-    <p><a href="${loginUrl}" style="display:inline-block;background:#D7261E;color:#FFFFFF;text-decoration:none;padding:14px 22px;border-radius:8px;font-weight:bold">Apri il gestionale</a></p>
-    <p style="font-size:14px;line-height:1.6;color:#4B5059">La demo è condivisa e si azzera ogni notte, quindi non inserire dati reali.</p>
-    <p style="font-size:15px;line-height:1.6">Se vuoi una mano a capire se fa per il tuo salone, rispondi a questa email: ti risponde una persona, non un robot.</p>
-    <p style="font-size:15px;line-height:1.6">Andrea Lucietti<br>GestAuto</p>
-  </div>`;
+  const SITE_URL = "https://sito.gestauto.studiobrillo.com";
+  const primoNome = nome.split(/\s+/)[0] || nome;
+  const FONT = "Helvetica,Arial,sans-serif";
+  const MONO = "'SFMono-Regular',Menlo,Consolas,monospace";
+
+  const visitorHtml = `<!doctype html>
+<html lang="it"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="supported-color-schemes" content="dark light">
+<title>Le chiavi della demo GestAuto</title>
+</head>
+<body style="margin:0;padding:0;background:#0B0D10" bgcolor="#0B0D10">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#0B0D10;font-size:1px">Email e password per provare il gestionale, pronte all'uso.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0B0D10" style="background:#0B0D10">
+<tr><td align="center" style="padding:32px 16px">
+  <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:560px">
+    <tr><td style="padding:0 4px 18px;font-family:${FONT};font-size:14px;letter-spacing:3px;font-weight:700;color:#F4F5F7">GEST<span style="color:#E5392F">AUTO</span></td></tr>
+    <tr><td bgcolor="#151820" style="background:#151820;border:1px solid #262B35;border-radius:14px;padding:32px 28px;font-family:${FONT};color:#F4F5F7">
+      <p style="margin:0 0 10px;font-size:12px;letter-spacing:2px;font-weight:700;color:#E5392F">ACCESSO DEMO</p>
+      <h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:700;color:#FFFFFF">Ciao ${esc(primoNome)}, le chiavi sono pronte</h1>
+      <p style="margin:0 0 24px;font-size:15px;line-height:1.6;color:#C3C8D0">Puoi provare il gestionale come se fosse quello di ${esc(salone)}: carica auto, genera contratti, gestisci le richieste. Fai quello che vuoi, non rompi niente.</p>
+
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0B0D10" style="background:#0B0D10;border:1px solid #262B35;border-radius:10px">
+        <tr><td style="padding:14px 18px 4px;font-size:11px;letter-spacing:1.5px;font-weight:700;color:#8A919C">EMAIL</td></tr>
+        <tr><td style="padding:0 18px 14px;font-family:${MONO};font-size:16px;font-weight:700;color:#FFFFFF">${esc(demoEmail)}</td></tr>
+        <tr><td style="padding:0 18px"><div style="border-top:1px solid #262B35;height:1px;line-height:1px;font-size:1px">&nbsp;</div></td></tr>
+        <tr><td style="padding:14px 18px 4px;font-size:11px;letter-spacing:1.5px;font-weight:700;color:#8A919C">PASSWORD</td></tr>
+        <tr><td style="padding:0 18px 16px;font-family:${MONO};font-size:16px;font-weight:700;color:#FFFFFF">${esc(demoPassword)}</td></tr>
+      </table>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:26px 0 8px">
+        <tr><td bgcolor="#D7261E" style="background:#D7261E;border-radius:8px">
+          <a href="${loginUrl}" style="display:inline-block;padding:15px 28px;font-family:${FONT};font-size:15px;font-weight:700;color:#FFFFFF;text-decoration:none">Apri il gestionale</a>
+        </td></tr>
+      </table>
+      <p style="margin:0 0 26px;font-size:14px;line-height:1.6;color:#C3C8D0">Vuoi vedere anche cosa trovano i tuoi clienti? <a href="${SITE_URL}" style="color:#FF6B5F;text-decoration:underline">Guarda il sito vetrina demo</a>.</p>
+
+      <p style="margin:0 0 18px;padding:12px 14px;font-size:13px;line-height:1.55;color:#C3C8D0;background:#1B1F29;border-radius:8px">La demo è condivisa e si azzera ogni notte alle 3: non inserire dati reali.</p>
+
+      <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#F4F5F7">Se vuoi una mano a capire se fa per il tuo salone, rispondi a questa email: ti risponde una persona, non un robot.</p>
+      <p style="margin:0;font-size:15px;line-height:1.5;color:#F4F5F7"><strong>Andrea Lucietti</strong><br><span style="color:#8A919C">GestAuto</span></p>
+    </td></tr>
+    <tr><td style="padding:18px 4px 0;font-family:${FONT};font-size:12px;line-height:1.6;color:#6B7280">Hai ricevuto questa email perché hai richiesto l'accesso alla demo su gestauto.studiobrillo.com.</td></tr>
+  </table>
+</td></tr>
+</table>
+</body></html>`;
+
+  const visitorText = `Ciao ${primoNome}, le chiavi della demo GestAuto sono pronte.
+
+Email: ${demoEmail}
+Password: ${demoPassword}
+Gestionale: ${loginUrl}
+Sito vetrina demo: ${SITE_URL}
+
+La demo è condivisa e si azzera ogni notte alle 3: non inserire dati reali.
+Se vuoi una mano, rispondi a questa email.
+
+Andrea Lucietti
+GestAuto`;
 
   const notifyHtml = `
-  <div style="font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6">
+  <div style="font-family:${FONT};font-size:15px;line-height:1.6;color:#111317">
     <h2 style="margin:0 0 12px">Nuova richiesta demo GestAuto</h2>
-    <p><strong>Nome:</strong> ${esc(nome)}<br><strong>Autosalone:</strong> ${esc(salone)}<br><strong>Email:</strong> ${esc(email)}<br><strong>Telefono:</strong> ${esc(telefono || "non indicato")}<br><strong>Consenso marketing:</strong> ${marketing ? "sì" : "no"}</p>
+    <p style="margin:0"><strong>Nome:</strong> ${esc(nome)}<br><strong>Autosalone:</strong> ${esc(salone)}<br><strong>Email:</strong> ${esc(email)}<br><strong>Telefono:</strong> ${esc(telefono || "non indicato")}<br><strong>Consenso marketing:</strong> ${marketing ? "sì" : "no"}</p>
+    <p style="margin:16px 0 0;color:#4B5059;font-size:13px">Rispondi a questa email per scrivergli direttamente.</p>
   </div>`;
 
   const [visitor, notify] = await Promise.allSettled([
@@ -115,6 +165,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       replyTo: process.env.NOTIFY_EMAIL,
       subject: "Le chiavi della demo GestAuto",
       html: visitorHtml,
+      text: visitorText,
     }),
     resend.emails.send({
       from: process.env.RESEND_FROM as string,
