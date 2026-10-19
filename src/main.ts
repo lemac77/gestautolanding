@@ -48,23 +48,6 @@ const year = (c: Car) => c.year.split("/")[1];
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = (v: string) => v.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string));
 
-/* ---------- Hero: il gestionale ---------- */
-function initPreviews() {
-  const list = $("mock-cars");
-  [CARS[0], CARS[2], CARS[4], CARS[7]].forEach((car, i) => {
-    const row = el("div", { class: "car-row" });
-    row.style.setProperty("--r", String(i));
-    const thumb = el("div", { class: "car-thumb", "aria-hidden": "true" });
-    paint(thumb, car);
-    const info = el("div", { class: "info" });
-    info.append(el("div", { class: "car-name" }, car.name), el("div", { class: "car-meta" }, `${year(car)} · ${car.km}`));
-    const pillClass = car.status === "Online" ? "pill-online" : car.status === "Venduta" ? "pill-sold" : "pill-draft";
-    const label = car.status === "Online" ? "Sul sito" : car.status;
-    row.append(thumb, info, el("div", { class: "car-price" }, car.price), el("span", { class: `pill ${pillClass}` }, label));
-    list.append(row);
-  });
-}
-
 /* ---------- Generatore contratti: anteprima live + PDF vero ---------- */
 type Doc = { title: string; num: string; fields: [string, string][]; body: string; sign: [string, string] };
 
@@ -276,7 +259,7 @@ function initGenerator() {
 function initCalculator() {
   const sold = $<HTMLInputElement>("r-sold");
   const now = $<HTMLInputElement>("r-now");
-  const withG = $<HTMLInputElement>("r-with");
+  const WITH_GESTAUTO = 15; // minuti per pratica con GestAuto: valore fisso di riferimento
   const fmt = (n: number) => (Math.round(n * 10) / 10).toLocaleString("it-IT");
   const shown = new Map<string, { value: number; token: number }>();
 
@@ -300,17 +283,16 @@ function initCalculator() {
   const update = () => {
     const s = Number(sold.value);
     const a = Number(now.value);
-    const b = Math.min(Number(withG.value), a);
+    const b = Math.min(WITH_GESTAUTO, a);
     const nowH = (s * a) / 60;
     const withH = (s * b) / 60;
     const saved = nowH - withH;
-    [sold, now, withG].forEach((r) => {
+    [sold, now].forEach((r) => {
       const pct = ((Number(r.value) - Number(r.min)) / (Number(r.max) - Number(r.min))) * 100;
       r.style.setProperty("--fill", `${pct}%`);
     });
     $("o-sold").textContent = `${s} auto`;
     $("o-now").textContent = `${a} min`;
-    $("o-with").textContent = `${Number(withG.value)} min`;
 
     const inMinutes = saved < 1;
     $("c-unit").textContent = inMinutes ? "minuti" : "ore";
@@ -322,7 +304,7 @@ function initCalculator() {
     $("b-with").style.width = `${a > 0 ? (b / a) * 100 : 0}%`;
     $("c-formula").textContent = `${s} auto × (${a} − ${b}) min = ${(s * (a - b)).toLocaleString("it-IT")} min = ${fmt(saved)} ore al mese. Giornate lavorative calcolate su 8 ore.`;
   };
-  [sold, now, withG].forEach((r) => r.addEventListener("input", update));
+  [sold, now].forEach((r) => r.addEventListener("input", update));
   update();
 }
 
@@ -407,6 +389,107 @@ function initFaq() {
   });
 }
 
+/* ---------- Parole che entrano una a una ---------- */
+function splitWords(root: HTMLElement) {
+  let i = 0;
+  const walk = (node: Node) => {
+    for (const child of Array.from(node.childNodes)) {
+      if (child.nodeType === Node.TEXT_NODE) {
+        const frag = document.createDocumentFragment();
+        for (const part of (child.textContent ?? "").split(/(\s+)/)) {
+          if (!part) continue;
+          if (/^\s+$/.test(part)) frag.append(document.createTextNode(" "));
+          else {
+            const w = el("span", { class: "w" }, part);
+            w.style.setProperty("--i", String(i++));
+            frag.append(w);
+          }
+        }
+        node.replaceChild(frag, child);
+      } else if (child.nodeType === Node.ELEMENT_NODE && (child as HTMLElement).tagName !== "BR") {
+        walk(child);
+      }
+    }
+  };
+  walk(root);
+  root.classList.add("is-split");
+}
+
+/* ---------- Hero: tab che ruotano, finestra che si raddrizza ---------- */
+function initShowcase() {
+  const root = document.getElementById("showcase");
+  if (!root) return;
+  const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>(".show-tab"));
+  const imgs = Array.from(root.querySelectorAll<HTMLImageElement>(".show-views img"));
+  const url = $("show-url");
+  const URLS = ["gestionale · Berica Motori", "gestionale · Berica Motori · Vendite", "gestionale · Berica Motori · Richieste", "bericamotori.it"];
+  const DUR = 5500;
+  let cur = 0;
+  let timer = 0;
+  let paused = false;
+
+  function schedule() {
+    window.clearTimeout(timer);
+    if (!paused) timer = window.setTimeout(() => show((cur + 1) % tabs.length), DUR);
+  }
+  function show(i: number) {
+    cur = i;
+    tabs.forEach((t, k) => {
+      t.classList.toggle("is-active", k === i);
+      t.classList.remove("is-timing");
+      t.setAttribute("aria-selected", String(k === i));
+      t.tabIndex = k === i ? 0 : -1;
+    });
+    imgs.forEach((m, k) => {
+      m.classList.toggle("is-on", k === i);
+      m.setAttribute("aria-hidden", String(k !== i));
+    });
+    url.textContent = URLS[i];
+    void tabs[i].offsetWidth;
+    if (!paused) tabs[i].classList.add("is-timing");
+    schedule();
+  }
+  tabs.forEach((t, k) => t.addEventListener("click", () => show(k)));
+  root.addEventListener("pointerenter", () => { paused = true; window.clearTimeout(timer); tabs[cur].classList.remove("is-timing"); });
+  root.addEventListener("pointerleave", () => { paused = false; show(cur); });
+  show(0);
+}
+
+function initHeroMotion() {
+  const hero = document.getElementById("hero");
+  const frame = document.getElementById("show-frame");
+  if (!hero || !frame) return;
+  let queued = false;
+  const apply = () => {
+    queued = false;
+    const y = window.scrollY;
+    const p = Math.min(1, y / 420);
+    frame.style.setProperty("--rx", `${reduceMotion ? 0 : 12 * (1 - p)}deg`);
+    frame.style.setProperty("--sc", String(reduceMotion ? 1 : 0.93 + 0.07 * p));
+    hero.style.setProperty("--sy", String(y));
+  };
+  apply();
+  window.addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(apply); } }, { passive: true });
+  hero.addEventListener("pointermove", (e) => {
+    const r = hero.getBoundingClientRect();
+    hero.style.setProperty("--hx", `${e.clientX - r.left}px`);
+    hero.style.setProperty("--hy", `${e.clientY - r.top}px`);
+  }, { passive: true });
+}
+
+function countUp(node: HTMLElement) {
+  const to = Number(node.dataset.count);
+  if (!to) return;
+  const t0 = performance.now();
+  const step = (t: number) => {
+    const k = Math.min(1, (t - t0) / 1400);
+    node.textContent = String(Math.round(to * (1 - Math.pow(1 - k, 3))));
+    if (k < 1) requestAnimationFrame(step);
+  };
+  node.textContent = "0";
+  requestAnimationFrame(step);
+}
+
 /* ---------- Effetti: nav, comparsa allo scroll, luce sulle card ---------- */
 function initUi() {
   const nav = document.querySelector<HTMLElement>(".nav");
@@ -425,32 +508,55 @@ function initUi() {
     card.style.setProperty("--my", `${e.clientY - r.top}px`);
   }, { passive: true });
 
-  if (reduceMotion || !("IntersectionObserver" in window)) return;
+  // Titolo dell'hero: parola per parola, subito
+  const h1 = document.querySelector<HTMLElement>(".hero .h1");
+  if (h1) {
+    splitWords(h1);
+    h1.style.setProperty("--base", "120ms");
+    requestAnimationFrame(() => requestAnimationFrame(() => h1.classList.add("in-view")));
+  }
+
+  const titles = Array.from(document.querySelectorAll<HTMLElement>("main .h2"));
+  titles.forEach((t) => splitWords(t));
+
   const targets = document.querySelectorAll<HTMLElement>(
-    ".section-head, .block-title, .chips, .site-note, .viewer, .pack-card, .flow li, .pack-note, .tile, .gen-panel, .gen-out, .range, .calc-out, .feature, .cmp, .steps li, .demo-copy > *, .form-card, .plan, .card-dark, .legal, .faq > .h2, .faq-item, .cta-box",
+    ".section-head > :not(.h2), .block-title, .chips li, .site-note, .viewer, .pack-card, .flow li, .pack-note, .tile, .gen-panel, .gen-out, .range, .fixed-row, .calc-out, .stat, .feature, .cmp-head, .cmp-row, .steps li, .demo-copy > :not(.h2):not(.section-head), .form-card, .plan, .card-dark, .legal, .faq-item, .cta-box > :not(.h2)",
   );
+  if (!("IntersectionObserver" in window)) {
+    titles.forEach((t) => t.classList.add("in-view"));
+    document.querySelectorAll(".cmp-row, .tile").forEach((n) => n.classList.add("drawn"));
+    return;
+  }
+  const titleIo = new IntersectionObserver((entries) => {
+    for (const en of entries) if (en.isIntersecting) { en.target.classList.add("in-view"); titleIo.unobserve(en.target); }
+  }, { threshold: 0.35 });
+  titles.forEach((t) => titleIo.observe(t));
+
   const seen = new Map<Element, number>();
   const io = new IntersectionObserver((entries) => {
     for (const en of entries) {
       if (!en.isIntersecting) continue;
       const node = en.target as HTMLElement;
       io.unobserve(node);
-      node.classList.add("in");
+      node.classList.add("in", "drawn");
+      const num = node.querySelector<HTMLElement>(".stat-n[data-count]");
+      if (num) countUp(num);
       const delay = Number(node.style.getPropertyValue("--d").replace("ms", "")) || 0;
       window.setTimeout(() => {
         node.removeAttribute("data-reveal");
         node.classList.remove("in");
         node.style.removeProperty("--d");
-      }, delay + 1000);
+      }, delay + 1100);
     }
   }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
 
   targets.forEach((node) => {
-    if (node.closest("[data-reveal]") && node.closest("[data-reveal]") !== node) return;
+    const outer = node.parentElement?.closest("[data-reveal]");
+    if (outer && outer !== node) return;
     const parent = node.parentElement!;
     const n = seen.get(parent) ?? 0;
     seen.set(parent, n + 1);
-    node.style.setProperty("--d", `${Math.min(n, 5) * 80}ms`);
+    node.style.setProperty("--d", `${Math.min(n, 6) * 90}ms`);
     node.setAttribute("data-reveal", "");
     io.observe(node);
   });
@@ -505,10 +611,11 @@ function initForm() {
   });
 }
 
-initPreviews();
 initGenerator();
 initCalculator();
 initViewer();
 initFaq();
 initForm();
 initUi();
+initShowcase();
+initHeroMotion();
