@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GestAuto · Il gestionale con sito web per autosaloni</title>
+<meta name="description" content="Parco auto, fotografie, contratti PDF e sito web in un unico sistema per autosaloni. Prova gratis la demo di GestAuto.">
+<meta property="og:title" content="GestAuto · Il gestionale per autosaloni">
+<meta property="og:description" content="Gestisci meno pratiche. Vendi più auto. Parco auto, contratti e sito web in un unico sistema.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0B0C0E">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="GestAuto, torna all'inizio">
+      <span class="brand-mark"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 14l4-4"/><path d="M3.5 18a9 9 0 1 1 17 0"/></svg></span>
+      <span class="brand-name">GestAuto</span>
+    </a>
+    <nav class="nav-links" aria-label="Principale">
+      <a href="#demo">Prova la demo</a>
+      <a href="#funzionalita">Funzionalità</a>
+      <a href="#sito">Sito web</a>
+      <a href="#prezzi">Prezzi</a>
+      <a href="#faq">FAQ</a>
+      <a href="#demo" class="btn btn-light">Prova la demo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Il gestionale per autosaloni</p>
+      <h1 class="h1">Gestisci meno pratiche. Vendi più auto.</h1>
+      <p class="lead">Parco auto, fotografie, contratti e sito web. Tutto in un unico sistema, senza inserire gli stessi dati più volte. Carichi un'auto, gestisci i documenti e la pubblichi online. GestAuto tiene tutto collegato.</p>
+      <div class="btn-row">
+        <a href="#demo" class="btn btn-accent">Prova la demo</a>
+        <a href="#prova" class="btn btn-ghost">Genera un contratto di prova</a>
+      </div>
+      <p class="small" style="color: var(--dim)">Nessun impegno. Prova il gestionale prima di scegliere.</p>
+    </div>
+
+    <div class="hero-mock">
+      <div class="tabs" role="tablist" aria-label="Anteprima di GestAuto">
+        <button class="tab" role="tab" id="tab-auto" aria-controls="panel-auto" aria-selected="true">Parco auto</button>
+        <button class="tab" role="tab" id="tab-doc" aria-controls="panel-doc" aria-selected="false" tabindex="-1">Contratti</button>
+        <button class="tab" role="tab" id="tab-sito" aria-controls="panel-sito" aria-selected="false" tabindex="-1">Sito web</button>
+      </div>
+      <div class="device">
+        <div class="screen">
+          <div class="panel" role="tabpanel" id="panel-auto" aria-labelledby="tab-auto">
+            <div class="panel-head"><span class="panel-title">Parco auto</span><span class="chip-accent">+ Nuova auto</span></div>
+            <div class="choice-list" id="mock-cars"></div>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-doc" aria-labelledby="tab-doc" hidden>
+            <span class="panel-title">Documenti</span>
+            <div class="doc-grid">
+              <div class="doc-card">Contratto vendita<small>PDF · numerato</small></div>
+              <div class="doc-card">Contratto acquisto<small>PDF · numerato</small></div>
+              <div class="doc-card">Certificato conformità<small>PDF · numerato</small></div>
+              <div class="doc-card">Scheda permuta<small>PDF · numerato</small></div>
+            </div>
+            <div class="doc-last">Ultimo: Contratto vendita n. 2026/041</div>
+          </div>
+          <div role="tabpanel" id="panel-sito" aria-labelledby="tab-sito" hidden>
+            <div class="site-bar"><strong>Berica Motori</strong><span>Auto · Chi siamo · Contatti</span></div>
+            <div class="site-grid" id="mock-site"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip" aria-hidden="true">
+  <div class="wrap"><span>Parco auto</span><span>Contratti PDF</span><span>Permute</span><span>Fotografie organizzate</span><span>Pubblicazione automatica</span><span>Richieste clienti</span><span>SEO</span></div>
+</div>
+
+<!-- GENERATORE -->
+<section id="prova" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Provalo subito</p>
+      <h2 class="h2">Un contratto pronto in pochi click. Senza aprire Word.</h2>
+      <p class="lead">Scegli il veicolo, seleziona il documento e genera il PDF. GestAuto recupera i dati già presenti nella scheda dell'auto, così non devi ricopiarli ogni volta.</p>
+    </div>
+    <div class="split">
+      <div class="card-dark gen-controls">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <span class="step-label" id="lbl-car">1 · Seleziona un'auto</span>
+          <div class="choice-list" id="gen-cars" role="group" aria-labelledby="lbl-car"></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <span class="step-label" id="lbl-doc">2 · Scegli il documento</span>
+          <div class="choice-grid" id="gen-docs" role="group" aria-labelledby="lbl-doc"></div>
+        </div>
+        <button type="button" class="btn btn-accent btn-block btn-caps" id="gen-go">3 · Genera il PDF</button>
+      </div>
+      <div class="gen-output" aria-live="polite">
+        <div class="gen-empty" id="gen-empty">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#6B717B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5"/></svg>
+          <span>Il tuo documento apparirà qui, già compilato con i dati del veicolo e pronto da scaricare.</span>
+        </div>
+        <div class="paper" id="gen-paper" hidden>
+          <div class="paper-head">
+            <div><div class="paper-title" id="p-title"></div><div class="paper-sub">Berica Motori · Autosalone dimostrativo</div></div>
+            <div class="paper-num" id="p-num"></div>
+          </div>
+          <dl class="paper-fields">
+            <div><dt>Veicolo</dt><dd id="p-car"></dd></div>
+            <div><dt>Targa</dt><dd id="p-plate" style="font-family: var(--mono)"></dd></div>
+            <div><dt>Immatricolazione</dt><dd id="p-year"></dd></div>
+            <div><dt>Chilometri</dt><dd id="p-km"></dd></div>
+            <div><dt>Cliente</dt><dd>Mario Rossi</dd></div>
+            <div><dt>Importo</dt><dd id="p-price" style="font-weight: 800"></dd></div>
+          </dl>
+          <div class="paper-lines" aria-hidden="true"><span></span><span style="width: 92%"></span><span style="width: 80%"></span></div>
+          <div class="paper-sign"><span>Il venditore</span><span>L'acquirente</span></div>
+          <div class="paper-badge">Generatore interattivo · Prova gratuita</div>
+        </div>
+      </div>
+    </div>
+    <p style="margin: 28px 0 0; color: var(--muted)">Vuoi provare anche tutte le altre funzioni? <a href="#demo">Accedi alla demo completa.</a></p>
+  </div>
+</section>
+
+<!-- CALCOLATORE -->
+<section class="section light calc">
+  <div class="wrap">
+    <div class="calc-inputs">
+      <p class="eyebrow">Il tempo è denaro</p>
+      <h2 class="h2">Quanto tempo perdi ogni mese in attività ripetitive?</h2>
+      <div class="range">
+        <div class="range-head"><label for="r-sold">Quante auto vendi al mese?</label><output for="r-sold" id="o-sold"></output></div>
+        <input id="r-sold" type="range" min="1" max="60" value="12">
+      </div>
+      <div class="range">
+        <div class="range-head"><label for="r-now">Quanto tempo impieghi oggi per ogni pratica?</label><output for="r-now" id="o-now"></output></div>
+        <input id="r-now" type="range" min="10" max="120" step="5" value="45">
+      </div>
+      <div class="range">
+        <div class="range-head"><label for="r-with">Quanto tempo impiegheresti con GestAuto?</label><output for="r-with" id="o-with"></output></div>
+        <input id="r-with" type="range" min="5" max="60" step="5" value="15">
+      </div>
+      <p class="small">Inserisci i tuoi valori per calcolare il tempo potenzialmente recuperabile. La stima considera la gestione della scheda auto, la preparazione del contratto e la pubblicazione sul sito.</p>
+    </div>
+    <div class="calc-out" aria-live="polite">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span class="step-label">Stima · Ore risparmiate al mese</span>
+        <span class="calc-big" id="c-month"></span>
+      </div>
+      <hr class="rule">
+      <div class="calc-grid">
+        <div><span>Ore risparmiate all'anno</span><span id="c-year"></span></div>
+        <div><span>Giornate lavorative recuperate, calcolate su 8 ore</span><span id="c-days"></span></div>
+      </div>
+      <p style="margin: 0; font-family: var(--mono); font-size: 13px; color: var(--dim); line-height: 1.6" id="c-formula"></p>
+      <p style="margin: 0; color: var(--muted); line-height: 1.6">Meno tempo davanti al computer. Più tempo sul piazzale, con i clienti e sulle prossime vendite.</p>
+      <p style="margin: 0; font-size: 12px; color: var(--dim); line-height: 1.5">Stima indicativa basata sui valori inseriti. Non è un risultato garantito.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FUNZIONALITÀ -->
+<section id="funzionalita" class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Tutto sotto controllo</p>
+      <h2 class="h2">Tutto il tuo autosalone. Un solo gestionale.</h2>
+    </div>
+    <div class="features">
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h12"/></svg></span><span class="feature-n">01</span></div>
+        <h3>Parco auto sempre aggiornato</h3>
+        <p>Tutti i tuoi veicoli in un unico archivio, con prezzo, chilometraggio, optional, fotografie e stato di vendita. Trovi le informazioni quando ti servono, senza saltare tra fogli Excel e cartelle.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg></span><span class="feature-n">02</span></div>
+        <h3>Contratti PDF automatici</h3>
+        <p>Genera i documenti partendo dai dati già inseriti. Contratti di vendita, acquisto, certificati di conformità e schede permuta, con modelli personalizzati per il tuo autosalone.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg></span><span class="feature-n">03</span></div>
+        <h3>Numerazione automatica</h3>
+        <p>I documenti vengono numerati in sequenza senza dover assegnare manualmente ogni numero. Meno passaggi, meno rischio di duplicazioni.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></span><span class="feature-n">04</span></div>
+        <h3>Fotografie organizzate</h3>
+        <p>Ogni veicolo ha la sua galleria. Carichi le immagini nella scheda corretta e le ritrovi subito, senza cercare tra smartphone, chat e cartelle condivise.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3"/></svg></span><span class="feature-n">05</span></div>
+        <h3>Permute collegate alla vendita</h3>
+        <p>Registra il veicolo ritirato in permuta e collegalo alla relativa operazione di vendita. Dati e informazioni restano organizzati nello stesso flusso di lavoro.</p>
+      </article>
+      <article class="feature">
+        <div class="feature-top"><span class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg></span><span class="feature-n">06</span></div>
+        <h3>Richieste clienti centralizzate</h3>
+        <p>Le richieste ricevute dal sito arrivano alla tua email e vengono raccolte nel gestionale. Puoi ritrovare i contatti senza perderti tra caselle di posta e appunti.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SITO WEB -->
+<section id="sito" class="section dark-2 site">
+  <div class="wrap">
+    <div class="site-copy">
+      <p class="eyebrow">Gestionale + sito web</p>
+      <h2 class="h2">Il tuo parco auto online. Sempre aggiornato.</h2>
+      <p class="lead">Un sito professionale, veloce e progettato per smartphone, con il tuo logo, i tuoi colori e il dominio del tuo autosalone. Quando inserisci un veicolo nel gestionale, le informazioni vengono sincronizzate con il sito, senza dover aggiornare due sistemi separati.</p>
+      <ul class="checks">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Ricerca delle auto con filtri per prezzo e alimentazione</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Schede veicolo con fotografie, caratteristiche e richiesta informazioni</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Struttura ottimizzata per i motori di ricerca</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Statistiche per monitorare le visite al sito</li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Recensioni dei clienti in evidenza</li>
+      </ul>
+      <p style="margin: 0; font-weight: 600">Un solo inserimento. Il gestionale e il tuo sito lavorano insieme.</p>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-bar"><span>Berica Motori</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
+          <div class="filters" id="filters" role="group" aria-label="Filtra per alimentazione"></div>
+          <div class="phone-count" id="phone-count" aria-live="polite"></div>
+          <div class="phone-list" id="phone-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIMA E DOPO -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Meno lavoro manuale</p>
+      <h2 class="h2">Non cambiare il tuo lavoro. Cambia il modo in cui lo gestisci.</h2>
+    </div>
+    <div class="table-box">
+      <table class="compare">
+        <thead><tr><th scope="col">Attività</th><th scope="col">Prima</th><th scope="col" class="after">Con GestAuto</th></tr></thead>
+        <tbody>
+          <tr><td>Contratti</td><td>Copi i dati in Word, ricontrolli ogni campo e assegni il numero al documento.</td><td class="after">Selezioni il veicolo e generi il PDF con i dati già compilati e la numerazione automatica.</td></tr>
+          <tr><td>Pubblicazione delle auto</td><td>Inserisci l'auto nel gestionale e poi devi ricordarti di aggiornare anche il sito.</td><td class="after">Salvi la scheda e il veicolo viene pubblicato sul sito in automatico.</td></tr>
+          <tr><td>Auto vendute</td><td>Devi ricordarti di aggiornare la disponibilità online quando un'auto viene venduta.</td><td class="after">Aggiorni lo stato del veicolo nel gestionale e la disponibilità sul sito si aggiorna automaticamente.</td></tr>
+          <tr><td>Fotografie</td><td>Cerchi le immagini tra telefono, chat e cartelle.</td><td class="after">Tutte le foto sono raccolte nella scheda del veicolo.</td></tr>
+          <tr><td>Richieste clienti</td><td>Email, messaggi e appunti sparsi tra diversi strumenti.</td><td class="after">Le richieste dal sito vengono raccolte nel gestionale, così puoi ritrovarle facilmente.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ATTIVAZIONE -->
+<section class="section light">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Attivazione</p>
+      <h2 class="h2">Dalla demo al tuo autosalone. Ti seguiamo noi.</h2>
+    </div>
+    <ol class="steps">
+      <li><span class="n">01</span><h3>Prova GestAuto</h3><p>Accedi alla demo completa e scopri le funzionalità con un autosalone già configurato. Puoi esplorare il sistema prima di acquistare.</p></li>
+      <li><span class="n">02</span><h3>Lo personalizziamo</h3><p>Configuriamo il sito con il tuo logo, i tuoi colori e il tuo dominio. Adattiamo inoltre i modelli di contratto alle tue esigenze.</p></li>
+      <li><span class="n">03</span><h3>Inseriamo le tue auto</h3><p>Ti aiutiamo a organizzare il parco auto iniziale e a inserire i dati e le fotografie dei veicoli, per partire con una base già pronta.</p></li>
+      <li><span class="n">04</span><h3>Si parte</h3><p>Mettiamo online il sito, attiviamo il gestionale e ti accompagniamo nella fase iniziale. Per il supporto, hai un referente diretto.</p></li>
+    </ol>
+    <div style="margin-top: 40px"><a href="#demo" class="btn btn-ink">Prova la demo</a></div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo" class="section demo">
+  <div class="wrap">
+    <div class="demo-copy">
+      <p class="eyebrow">Test drive</p>
+      <h2 class="h2">Prova GestAuto con un autosalone già pronto.</h2>
+      <p class="lead">Berica Motori è il nostro autosalone dimostrativo: trovi un sito web funzionante e un gestionale configurato con dati di esempio. Esplora le funzioni, consulta le auto e prova a generare i documenti. Ogni notte la demo viene ripristinata.</p>
+      <div class="link-cards">
+        <a class="link-card" href="https://motori-sito.vercel.app" target="_blank" rel="noopener">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg>
+          <span class="t"><strong>Guarda il sito demo</strong><span>Scopri come i clienti consultano il parco auto e inviano richieste di informazioni.</span></span>
+          <span class="go">Visita il sito ↗</span>
+        </a>
+        <a class="link-card" href="#form-demo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F2F3F5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <span class="t"><strong>Entra nel gestionale</strong><span>Accedi al pannello di gestione e prova le funzionalità con dati di esempio. Le credenziali ti arrivano via email dopo la richiesta.</span></span>
+          <span class="go">Richiedi l'accesso</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="form-card" id="form-demo">
+      <form class="form" id="demo-form" novalidate>
+        <h3 class="h3">Ricevi le credenziali della demo.</h3>
+        <p class="intro">Lascia i tuoi contatti. Ti invieremo via email le credenziali per accedere al gestionale e iniziare a provarlo.</p>
+        <div class="field"><label for="f-nome">Nome e cognome</label><input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Mario Rossi" required maxlength="120"></div>
+        <div class="field"><label for="f-salone">Nome dell'autosalone</label><input id="f-salone" name="salone" type="text" autocomplete="organization" placeholder="Autosalone Rossi" required maxlength="120"></div>
+        <div class="field-row">
+          <div class="field"><label for="f-email">Email di lavoro</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="mario@autosalone.it" required maxlength="160"></div>
+          <div class="field"><label for="f-tel">Telefono, facoltativo</label><input id="f-tel" name="telefono" type="tel" autocomplete="tel" placeholder="333 1234567" maxlength="40"></div>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="f-sito">Lascia vuoto</label><input id="f-sito" name="sito" type="text" tabindex="-1" autocomplete="off"></div>
+        <label class="consent"><input type="checkbox" name="privacy" required><span>Ho letto l'<a href="/privacy">informativa sulla privacy</a> relativa alla gestione della mia richiesta.</span></label>
+        <label class="consent"><input type="checkbox" name="marketing"><span>Acconsento a ricevere aggiornamenti commerciali e comunicazioni promozionali da GestAuto. Facoltativo.</span></label>
+        <p class="form-error" id="form-error" role="alert"></p>
+        <button type="submit" class="btn btn-accent btn-block btn-caps" id="form-submit">Inviami le credenziali</button>
+        <p class="small">Ricevi le credenziali via email. Nessuna iscrizione obbligatoria a newsletter promozionali.</p>
+      </form>
+
+      <div class="keys" id="demo-done" hidden tabindex="-1">
+        <h3 class="h3">La demo ti aspetta nella tua email.</h3>
+        <p class="small" style="font-size: 15px; color: var(--ink-2)">Abbiamo inviato le credenziali all'indirizzo indicato. Controlla la posta in arrivo e, se non trovi il messaggio, verifica anche la cartella spam.</p>
+        <a href="https://motori-gestionale.vercel.app/login" target="_blank" rel="noopener" class="btn btn-accent btn-block btn-caps">Vai al login ↗</a>
+        <hr class="rule" style="background: var(--ink-line)">
+        <span class="mono-label">Da provare, dopo l'accesso</span>
+        <div class="tour">
+          <a href="https://motori-gestionale.vercel.app/vendite" target="_blank" rel="noopener"><span><strong>Vendite</strong><small>Consulta la dashboard e visualizza l'andamento delle vendite.</small></span><span aria-hidden="true">↗</span></a>
+          <a href="https://motori-gestionale.vercel.app/richieste" target="_blank" rel="noopener"><span><strong>Richieste</strong><small>Ritrova i contatti ricevuti dal sito in un unico pannello.</small></span><span aria-hidden="true">↗</span></a>
+          <a href="https://motori-gestionale.vercel.app/scadenze" target="_blank" rel="noopener"><span><strong>Scadenze</strong><small>Consulta pratiche e documenti da tenere sotto controllo.</small></span><span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="small">La demo è condivisa con altri visitatori e viene ripristinata ogni notte. Non inserire dati personali di clienti, targhe reali, documenti o altre informazioni riservate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREZZI -->
+<section id="prezzi" class="section dark-2">
+  <div class="wrap">
+    <div class="price-head">
+      <div class="section-head">
+        <p class="eyebrow">Prezzi</p>
+        <h2 class="h2">Scegli come acquistare GestAuto.</h2>
+        <p class="lead">Gestionale e sito web, sempre insieme. Puoi pagare mese per mese, risparmiare con il piano annuale oppure acquistare la licenza senza un canone software ricorrente.</p>
+      </div>
+    </div>
+
+    <div class="plans">
+      <article class="plan plan-life">
+        <div class="plan-top"><h3 class="plan-name">Piano mensile</h3></div>
+        <div class="price"><strong>79 €</strong><span>/ mese</span></div>
+        <p>Per chi preferisce distribuire il costo nel tempo.</p>
+        <div class="price-line"><span>Attivazione iniziale</span><strong>590 € una tantum</strong></div>
+        <ul class="checks" id="plan-features">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Gestionale per il parco auto e archivio fotografico</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Contratti PDF personalizzati e numerati</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Gestione delle permute</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Sito web sul tuo dominio, sincronizzato con il gestionale</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Modulo contatti collegato alla tua email</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>SEO di base e statistiche</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Assistenza diretta</li>
+        </ul>
+        <a href="#demo" class="btn btn-ghost btn-caps">Prova prima la demo</a>
+      </article>
+
+      <article class="plan plan-main">
+        <div class="plan-top"><h3 class="plan-name">Piano annuale</h3></div>
+        <div class="price"><strong>869 €</strong><span>/ anno</span></div>
+        <p style="margin: 0; font-weight: 700">Risparmi 79 € rispetto al pagamento mensile.</p>
+        <p style="margin: 0; line-height: 1.6; color: var(--ink-2)">Tutte le funzionalità del piano mensile, con pagamento anticipato annuale.</p>
+        <div class="price-line"><span>Attivazione iniziale</span><strong>590 € una tantum</strong></div>
+        <a href="#demo" class="btn btn-accent btn-caps">Prova prima la demo</a>
+      </article>
+
+      <article class="plan plan-life">
+        <div class="plan-top"><h3 class="plan-name">Licenza senza canone software</h3></div>
+        <div class="price"><strong>2.590 €</strong><span>una tantum</span></div>
+        <p style="font-weight: 700; color: var(--text)">Attivazione inclusa.</p>
+        <p>La licenza viene acquistata una volta sola, senza un canone software ricorrente.</p>
+        <div class="price-line"><span>Hosting, backup e aggiornamenti</span><strong>190 € / anno</strong></div>
+        <p style="font-size: 15px">Per mantenere online il sito e garantire hosting, backup e aggiornamenti è previsto un costo annuale. Include le funzionalità previste dalla soluzione in abbonamento, secondo le condizioni della licenza.</p>
+        <a href="#demo" class="btn btn-ghost btn-caps">Prova prima la demo</a>
+      </article>
+    </div>
+
+    <div class="card-dark" style="margin-top: 20px">
+      <h3 style="margin: 0 0 16px; font-size: 20px; font-weight: 600">Cosa paghi davvero</h3>
+      <ul class="checks" style="color: var(--muted)">
+        <li><span style="color: var(--text); font-weight: 600; min-width: 150px">Piano mensile</span>590 € di attivazione + 79 € al mese.</li>
+        <li><span style="color: var(--text); font-weight: 600; min-width: 150px">Piano annuale</span>590 € di attivazione + 869 € all'anno.</li>
+        <li><span style="color: var(--text); font-weight: 600; min-width: 150px">Licenza</span>2.590 € iniziali + 190 € all'anno per i servizi indicati.</li>
+      </ul>
+    </div>
+
+    <p class="legal">GestAuto è proposto in regime forfettario, ove applicabile. I prezzi esposti sono quelli da pagare senza aggiunta di IVA, secondo il regime fiscale applicabile. L'eventuale imposta di bollo viene applicata in fattura quando dovuta. Gli abbonamenti ai portali esterni di annunci automobilistici non sono inclusi.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="wrap faq">
+    <h2 class="h2">Domande frequenti</h2>
+    <div class="faq-list" id="faq-list">
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="true" aria-controls="fa1">Posso usare il dominio del mio autosalone?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa1">Sì. Il sito può essere pubblicato sul dominio del tuo autosalone e personalizzato con il tuo logo e i tuoi colori.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa2">Posso personalizzare i contratti?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa2" hidden>Sì. Partiamo dai modelli disponibili per vendita, acquisto, conformità e permuta, per adattarli alle tue esigenze e alle clausole che utilizzi abitualmente.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa3">Devo installare un programma?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa3" hidden>No. GestAuto funziona direttamente dal browser, su computer, tablet e smartphone. Puoi gestire le auto anche mentre sei sul piazzale.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa4">Ho già un sito. Devo sostituirlo?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa4" hidden>Non necessariamente. Valutiamo se è possibile integrare il parco auto nel sito esistente oppure se conviene passare al sito incluso in GestAuto.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa5">I dati delle mie auto e dei miei clienti restano miei?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa5" hidden>Sì. I dati del tuo autosalone restano tuoi. Puoi richiederne l'esportazione secondo le modalità previste dal servizio e dall'informativa applicabile.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa6">Chi mi aiuta se ho un problema?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa6" hidden>Puoi contattare direttamente il tuo referente via email e telefono. Hai un punto di riferimento concreto per ricevere supporto.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa7">Il sito si aggiorna automaticamente?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa7" hidden>Sì. Quando inserisci un veicolo o ne aggiorni le informazioni nel gestionale, i dati vengono sincronizzati con il sito. La disponibilità online segue lo stato del veicolo registrato nel sistema.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa8">Posso smettere di usare GestAuto quando voglio?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa8" hidden>Le condizioni di disdetta, la durata del contratto e le modalità di esportazione dei dati dipendono dal piano scelto e dalle condizioni contrattuali. Troverai tutte le informazioni prima dell'attivazione.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa9">Cosa succede se scelgo la licenza senza canone software?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa9" hidden>Acquisti la licenza con un pagamento una tantum. Il mantenimento online del sito, l'hosting, i backup e gli aggiornamenti prevedono il costo annuale indicato. Durata della licenza, assistenza e condizioni di rinnovo dei servizi sono specificate nel contratto.</p></div>
+      <div class="faq-item"><h3 style="margin: 0"><button class="faq-q" aria-expanded="false" aria-controls="fa10">Gli annunci sui portali sono inclusi?<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></h3><p class="faq-a" id="fa10" hidden>No. Gli eventuali abbonamenti ai portali esterni di annunci automobilistici restano a carico dell'autosalone.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHIUSURA -->
+<section class="cta">
+  <div class="cta-box">
+    <h2 class="h2">Meno tempo alla scrivania. Più tempo per vendere.</h2>
+    <p>Scopri come gestire parco auto, documenti e sito web da un unico posto. Prova la demo completa, esplora le funzionalità e decidi con calma se GestAuto fa al caso tuo.</p>
+    <a href="#demo" class="btn btn-ink btn-caps">Prova la demo</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>GestAuto · Un progetto di Andrea Lucietti · P. IVA [P.IVA]</span>
+    <span>[EMAIL] · [TELEFONO] · <a href="/privacy">Privacy</a> · <a href="/cookie">Cookie Policy</a> · <a href="/condizioni">Condizioni del servizio</a></span>
+  </div>
+</footer>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
