@@ -5,14 +5,14 @@
 // Dipendenze: npm i resend @supabase/supabase-js
 // Variabili d'ambiente (Vercel > Settings > Environment Variables):
 //   RESEND_API_KEY            chiave API Resend
-//   RESEND_FROM               mittente su dominio verificato, es. "GestAuto <demo@gestauto.it>"
+//   RESEND_FROM               mittente su dominio verificato, es. "GestAuto <demo@gestauto.studiobrillo.com>"
 //   NOTIFY_EMAIL              dove ricevi l'avviso di ogni nuovo lead
-//   DEMO_LOGIN_URL            https://motori-gestionale.vercel.app/login
+//   DEMO_LOGIN_URL            https://app.gestauto.studiobrillo.com/login
 //   DEMO_EMAIL                demo@bericamotori.it
 //   DEMO_PASSWORD             password demo
 //   SUPABASE_URL              URL del progetto Supabase che tiene i lead
 //   SUPABASE_SERVICE_ROLE_KEY chiave service role (solo lato server, mai nel frontend)
-//   ALLOWED_ORIGIN            dominio della landing, es. https://gestauto.it
+//   ALLOWED_ORIGIN            dominio della landing, es. https://gestauto.studiobrillo.com
 //
 // Il form invia: nome, salone, email, telefono (facoltativo), privacy (obbligatorio),
 // marketing (facoltativo) e "sito" (campo trappola per i bot, deve restare vuoto).
