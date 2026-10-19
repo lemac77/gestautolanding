@@ -562,3 +562,15 @@ img { max-width: 100%; display: block; }
 .portal-logo i { font-style: normal; color: #fff; background: #ffd400; color: #0b0c0e; margin-left: 2px; padding: 0 3px; border-radius: 3px; }
 @media (max-width: 1000px) { .next-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 760px) { .next-grid { grid-template-columns: minmax(0, 1fr); } .next-card { padding: 24px; } }
+
+/* CRM */
+.crm-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
+.crm-copy .lead { margin: 16px 0 28px; }
+.crm-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.crm-points li { display: grid; gap: 4px; padding-left: 18px; border-left: 2px solid var(--line-2); }
+.crm-points strong { font-weight: 600; letter-spacing: -.01em; }
+.crm-points span { color: var(--dim); font-size: 14.5px; line-height: 1.55; }
+.crm-cta { margin-top: 32px; }
+.crm-shot { position: relative; background: var(--surface); border: 1px solid var(--line-2); border-radius: 18px; padding: 10px 10px 0; box-shadow: 0 40px 100px -40px rgba(215, 38, 30, .35), 0 40px 80px -40px #000; overflow: hidden; }
+.crm-shot img { display: block; width: 100%; height: auto; border-radius: 8px 8px 0 0; }
+@media (max-width: 1000px) { .crm-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; } }

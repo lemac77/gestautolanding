@@ -422,7 +422,7 @@ function initShowcase() {
   const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>(".show-tab"));
   const imgs = Array.from(root.querySelectorAll<HTMLImageElement>(".show-views img"));
   const url = $("show-url");
-  const URLS = ["gestionale · Berica Motori", "gestionale · Berica Motori · Vendite", "gestionale · Berica Motori · Richieste", "bericamotori.it"];
+  const URLS = ["gestionale · Berica Motori", "gestionale · Berica Motori · Vendite", "gestionale · Berica Motori · Richieste", "gestionale · Berica Motori · Trattative", "bericamotori.it"];
   const DUR = 5500;
   let cur = 0;
   let timer = 0;
@@ -499,7 +499,7 @@ function initUi() {
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  document.querySelectorAll<HTMLElement>(".feature, .tile, .pack-card, .flow li, .link-card, .plan-life, .next-card").forEach((c) => c.classList.add("spot"));
+  document.querySelectorAll<HTMLElement>(".feature, .tile, .pack-card, .flow li, .link-card, .plan-life, .next-card, .crm-shot").forEach((c) => c.classList.add("spot"));
   document.addEventListener("pointermove", (e) => {
     const card = (e.target as HTMLElement).closest<HTMLElement>(".spot");
     if (!card) return;
@@ -520,7 +520,7 @@ function initUi() {
   titles.forEach((t) => splitWords(t));
 
   const targets = document.querySelectorAll<HTMLElement>(
-    ".section-head > :not(.h2), .block-title, .chips li, .site-note, .viewer, .pack-card, .flow li, .pack-note, .tile, .gen-panel, .gen-out, .range, .fixed-row, .calc-out, .stat, .feature, .next-card, .cmp-head, .cmp-row, .steps li, .demo-copy > :not(.h2):not(.section-head), .form-card, .plan, .card-dark, .legal, .faq-item, .cta-box > :not(.h2)",
+    ".section-head > :not(.h2), .block-title, .chips li, .site-note, .viewer, .pack-card, .flow li, .pack-note, .tile, .gen-panel, .gen-out, .range, .fixed-row, .calc-out, .stat, .feature, .next-card, .crm-copy > :not(.h2), .crm-shot, .cmp-head, .cmp-row, .steps li, .demo-copy > :not(.h2):not(.section-head), .form-card, .plan, .card-dark, .legal, .faq-item, .cta-box > :not(.h2)",
   );
   if (!("IntersectionObserver" in window)) {
     titles.forEach((t) => t.classList.add("in-view"));
