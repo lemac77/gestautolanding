@@ -43,7 +43,7 @@
     <p class="lead">Parco auto, fotografie, contratti e sito web. Tutto in un unico sistema, senza inserire gli stessi dati più volte. Carichi un'auto, gestisci i documenti e la pubblichi online. GestAuto tiene tutto collegato.</p>
     <div class="btn-row">
       <a href="#demo" class="btn btn-accent">Prova la demo</a>
-      <a href="#prova" class="btn btn-ghost">Genera un contratto di prova</a>
+      <a href="#funzionalita" class="btn btn-ghost">Scopri le funzioni</a>
     </div>
     <p class="hero-note"><i aria-hidden="true"></i>Nessun impegno. Prova il gestionale prima di scegliere.</p>
   </div>
@@ -185,43 +185,6 @@
         <article class="tile w6"><span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4zM4 15l4-4 4 4 3-3 5 5"/></svg></span><h3>Galleria dello showroom</h3><p>Le foto del tuo salone, per farti scegliere prima ancora della visita.</p><div class="tile-vis"><span class="vis-thumbs"><span style="background-image:url('/sito/showroom.webp')"></span><span style="background-image:url('/auto/auto-03.webp')"></span><span style="background-image:url('/auto/auto-07.webp')"></span></span></div></article>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- GENERATORE -->
-<section id="prova" class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Provalo subito</p>
-      <h2 class="h2">Un contratto pronto in pochi click. Senza aprire Word.</h2>
-      <p class="lead">Scegli il veicolo, seleziona il documento e genera il PDF. GestAuto recupera i dati già presenti nella scheda dell'auto, così non devi ricopiarli ogni volta.</p>
-    </div>
-    <div class="gen">
-      <div class="gen-panel">
-        <div class="gen-step">
-          <span class="step-label" id="lbl-car"><b>1</b>Seleziona un'auto</span>
-          <div class="car-pick" id="gen-cars" role="group" aria-labelledby="lbl-car"></div>
-        </div>
-        <div class="gen-step">
-          <span class="step-label" id="lbl-doc"><b>2</b>Scegli il documento</span>
-          <div class="doc-seg" id="gen-docs" role="group" aria-labelledby="lbl-doc"></div>
-        </div>
-        <div class="gen-step">
-          <span class="step-label"><b>3</b>Genera e scarica</span>
-          <div class="gen-actions">
-            <button type="button" class="btn btn-accent btn-block" id="gen-go">Genera il PDF</button>
-            <button type="button" class="btn btn-ghost btn-block" id="gen-dl" hidden>Scarica il PDF</button>
-            <p class="gen-status" id="gen-status" aria-live="polite">L'anteprima del documento si aggiorna mentre scegli.</p>
-          </div>
-        </div>
-      </div>
-      <div class="gen-out">
-        <div class="gen-stage">
-          <div class="paper" id="gen-paper" aria-label="Anteprima del documento"></div>
-        </div>
-      </div>
-    </div>
-    <p style="margin: 32px 0 0; color: var(--muted)">Vuoi provare anche tutte le altre funzioni? <a href="#demo">Accedi alla demo completa.</a></p>
   </div>
 </section>
 
@@ -472,10 +435,14 @@
     </div>
 
     <div class="plans">
-      <article class="plan plan-life">
-        <div class="plan-top"><h3 class="plan-name">Piano mensile</h3><span class="tag">Gestionale + sito web</span></div>
-        <div class="price"><strong>79 €</strong><span>/ mese</span></div>
-        <p>Per chi preferisce distribuire il costo nel tempo.</p>
+      <article class="plan plan-main" id="plan-sub">
+        <div class="plan-top"><h3 class="plan-name">Abbonamento</h3><span class="tag">Gestionale + sito web</span></div>
+        <div class="bill-toggle" role="tablist" aria-label="Periodo di fatturazione">
+          <button type="button" role="tab" class="on" aria-selected="true" data-bill="m">Mensile</button>
+          <button type="button" role="tab" aria-selected="false" data-bill="y">Annuale</button>
+        </div>
+        <div class="price"><strong id="plan-price">79 €</strong><span id="plan-unit">/ mese</span><em class="save" id="plan-save">Risparmi 79 €</em></div>
+        <p id="plan-note" class="plan-note">Per chi preferisce distribuire il costo nel tempo.</p>
         <div class="price-line"><span>Attivazione iniziale</span><strong>590 € una tantum</strong></div>
         <ul class="checks" id="plan-features">
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Gestionale per il parco auto e archivio fotografico</li>
@@ -486,15 +453,6 @@
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>SEO di base e statistiche</li>
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Assistenza diretta</li>
         </ul>
-        <a href="#demo" class="btn btn-ghost btn-caps">Prova prima la demo</a>
-      </article>
-
-      <article class="plan plan-main">
-        <div class="plan-top"><h3 class="plan-name">Piano annuale</h3><span class="tag">Gestionale + sito web</span></div>
-        <div class="price"><strong>869 €</strong><span>/ anno</span></div>
-        <p style="margin: 0; font-weight: 700">Risparmi 79 € rispetto al pagamento mensile.</p>
-        <p style="margin: 0; line-height: 1.6; color: var(--ink-2)">Tutte le funzionalità del piano mensile, con pagamento anticipato annuale.</p>
-        <div class="price-line"><span>Attivazione iniziale</span><strong>590 € una tantum</strong></div>
         <a href="#demo" class="btn btn-accent btn-caps">Prova prima la demo</a>
       </article>
 
