@@ -106,7 +106,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0B0D10" style="background:#0B0D10">
 <tr><td align="center" style="padding:32px 16px">
   <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:560px">
-    <tr><td style="padding:0 4px 18px;font-family:${FONT};font-size:14px;letter-spacing:3px;font-weight:700;color:#F4F5F7">GEST<span style="color:#E5392F">AUTO</span></td></tr>
+    <tr><td style="padding:0 4px 18px"><img src="https://gestauto.me/email/logo.png" width="140" height="30" alt="GestAuto" style="display:block;border:0;width:140px;height:auto"></td></tr>
     <tr><td bgcolor="#151820" style="background:#151820;border:1px solid #262B35;border-radius:14px;padding:32px 28px;font-family:${FONT};color:#F4F5F7">
       <p style="margin:0 0 10px;font-size:12px;letter-spacing:2px;font-weight:700;color:#E5392F">ACCESSO DEMO</p>
       <h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:700;color:#FFFFFF">Ciao ${esc(primoNome)}, le chiavi sono pronte</h1>
