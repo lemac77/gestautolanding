@@ -5,14 +5,14 @@
 // Dipendenze: npm i resend @supabase/supabase-js
 // Variabili d'ambiente (Vercel > Settings > Environment Variables):
 //   RESEND_API_KEY            chiave API Resend
-//   RESEND_FROM               mittente su dominio verificato, es. "GestAuto <demo@gestauto.studiobrillo.com>"
+//   RESEND_FROM               mittente su dominio verificato, es. "GestAuto <demo@gestauto.me>"
 //   NOTIFY_EMAIL              dove ricevi l'avviso di ogni nuovo lead
-//   DEMO_LOGIN_URL            https://app.gestauto.studiobrillo.com/login
+//   DEMO_LOGIN_URL            https://app.gestauto.me/login
 //   DEMO_EMAIL                demo@bericamotori.it
 //   DEMO_PASSWORD             password demo
 //   SUPABASE_URL              URL del progetto Supabase che tiene i lead
 //   SUPABASE_SERVICE_ROLE_KEY chiave service role (solo lato server, mai nel frontend)
-//   ALLOWED_ORIGIN            dominio della landing, es. https://gestauto.studiobrillo.com
+//   ALLOWED_ORIGIN            dominio della landing, es. https://gestauto.me
 //
 // Il form invia: nome, salone, email, telefono (facoltativo), privacy (obbligatorio),
 // marketing (facoltativo) e "sito" (campo trappola per i bot, deve restare vuoto).
@@ -88,7 +88,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const demoEmail = process.env.DEMO_EMAIL as string;
   const demoPassword = process.env.DEMO_PASSWORD as string;
 
-  const SITE_URL = "https://sito.gestauto.studiobrillo.com";
+  const SITE_URL = "https://sito.gestauto.me";
   const primoNome = nome.split(/\s+/)[0] || nome;
   const FONT = "Helvetica,Arial,sans-serif";
   const MONO = "'SFMono-Regular',Menlo,Consolas,monospace";
@@ -132,7 +132,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#F4F5F7">Se vuoi una mano a capire se fa per il tuo salone, rispondi a questa email: ti risponde una persona, non un robot.</p>
       <p style="margin:0;font-size:15px;line-height:1.5;color:#F4F5F7"><strong>Andrea Lucietti</strong><br><span style="color:#8A919C">GestAuto</span></p>
     </td></tr>
-    <tr><td style="padding:18px 4px 0;font-family:${FONT};font-size:12px;line-height:1.6;color:#6B7280">Hai ricevuto questa email perché hai richiesto l'accesso alla demo su gestauto.studiobrillo.com.</td></tr>
+    <tr><td style="padding:18px 4px 0;font-family:${FONT};font-size:12px;line-height:1.6;color:#6B7280">Hai ricevuto questa email perché hai richiesto l'accesso alla demo su gestauto.me.</td></tr>
   </table>
 </td></tr>
 </table>

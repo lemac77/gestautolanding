@@ -112,7 +112,7 @@ function initCalculator() {
 }
 
 /* ---------- Visualizzatore del sito vero ---------- */
-const SITE = "https://sito.gestauto.studiobrillo.com";
+const SITE = "https://sito.gestauto.me";
 const SITE_PAGES = {
   home: { path: "/", label: "Home page", h: { desk: 7230, mob: 16000 } },
   parco: { path: "/parco-auto", label: "Pagina del parco auto", h: { desk: 2283, mob: 11720 } },
