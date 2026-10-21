@@ -20,6 +20,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
+import { createHash } from "node:crypto";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const supabase = createClient(
@@ -35,18 +36,41 @@ function esc(v: string) {
 }
 
 function clean(v: unknown, max = 120) {
-  return typeof v === "string" ? v.trim().slice(0, max) : "";
+  // Una riga sola: niente a capo (finirebbero negli oggetti delle email) né caratteri di controllo
+  // eslint-disable-next-line no-control-regex
+  return typeof v === "string" ? v.replace(/[\u0000-\u001f\u007f]+/g, " ").trim().slice(0, max) : "";
 }
 
+// Dell'IP salviamo solo un'impronta cifrata: serve a fermare chi invia in massa, non a identificare.
+function ipHash(req: VercelRequest) {
+  const fwd = req.headers["x-forwarded-for"];
+  const ip = (Array.isArray(fwd) ? fwd[0] : fwd || "").split(",")[0].trim() || req.socket?.remoteAddress || "";
+  if (!ip) return null;
+  return createHash("sha256").update(ip + (process.env.IP_SALT || "gestauto")).digest("hex").slice(0, 32);
+}
+
+const LIMITE_IP_ORA = 5; // richieste per IP in un'ora
+const LIMITE_GLOBALE_GIORNO = 300; // tetto di sicurezza su tutta la landing
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const origin = process.env.ALLOWED_ORIGIN || "*";
+  const origin = process.env.ALLOWED_ORIGIN || "https://gestauto.me";
   res.setHeader("Access-Control-Allow-Origin", origin);
+  res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return res.status(405).json({ ok: false, error: "Metodo non consentito" });
 
-  const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+  // Il form parte solo dal nostro sito: se il browser dichiara un'altra origine, si ferma qui.
+  const chiamante = req.headers.origin;
+  if (chiamante && chiamante !== origin) return res.status(403).json({ ok: false, error: "Richiesta non consentita." });
+
+  let body: Record<string, unknown>;
+  try {
+    body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+  } catch {
+    return res.status(400).json({ ok: false, error: "Richiesta non valida." });
+  }
 
   // Honeypot: campo nascosto "sito". Se compilato è un bot: rispondiamo ok e non facciamo nulla.
   if (clean(body.sito)) return res.status(200).json({ ok: true });
@@ -54,7 +78,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const nome = clean(body.nome);
   const salone = clean(body.salone);
   const email = clean(body.email, 160).toLowerCase();
-  const telefono = clean(body.telefono, 40);
+  const telefono = clean(body.telefono, 40).replace(/[^\d+()\s.-]/g, "");
   const privacy = body.privacy === true;
   const marketing = body.marketing === true;
 
@@ -64,6 +88,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // Limite semplice: massimo 3 richieste per email nelle ultime 24 ore.
   const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const ip = ipHash(req);
+
+  // Limiti anti abuso: per IP (ultima ora) e globale (ultimi 24h). Se il controllo non è
+  // disponibile (es. colonna non ancora creata) non blocca l'invio, ma gli altri limiti restano.
+  if (ip) {
+    const ora = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+    const r = await supabase.from("demo_leads").select("id", { count: "exact", head: true }).eq("ip_hash", ip).gte("created_at", ora);
+    if (!r.error && (r.count ?? 0) >= LIMITE_IP_ORA) {
+      return res.status(429).json({ ok: false, error: "Hai inviato troppe richieste. Riprova tra un po'." });
+    }
+  }
+  const glob = await supabase.from("demo_leads").select("id", { count: "exact", head: true }).gte("created_at", since);
+  if (!glob.error && (glob.count ?? 0) >= LIMITE_GLOBALE_GIORNO) {
+    return res.status(429).json({ ok: false, error: "Il servizio è molto richiesto in questo momento. Riprova più tardi." });
+  }
   const { count } = await supabase
     .from("demo_leads")
     .select("id", { count: "exact", head: true })
@@ -73,12 +112,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(429).json({ ok: false, error: "Ti abbiamo già mandato l'accesso: controlla la posta, anche nello spam." });
   }
 
-  const { error: dbError } = await supabase.from("demo_leads").insert({
+  const riga = {
     nome, salone, email, telefono,
     consenso_privacy: privacy,
     consenso_marketing: marketing,
     user_agent: clean(req.headers["user-agent"], 300),
-  });
+  };
+  let { error: dbError } = await supabase.from("demo_leads").insert({ ...riga, ip_hash: ip });
+  // Colonna ip_hash non ancora creata: salva comunque il lead senza.
+  if (dbError && /ip_hash/.test(dbError.message || "")) {
+    ({ error: dbError } = await supabase.from("demo_leads").insert(riga));
+  }
   if (dbError) {
     console.error("demo_leads insert", dbError);
     return res.status(500).json({ ok: false, error: "Qualcosa è andato storto, riprova tra un attimo." });
