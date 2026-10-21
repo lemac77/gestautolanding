@@ -532,6 +532,37 @@
   </div>
 </section>
 
+<!-- BANNER CONTATTO -->
+<aside class="contact-bar" aria-label="Richiedi GestAuto">
+  <div class="wrap">
+    <p><strong>Vuoi GestAuto per il tuo autosalone?</strong> Lasciaci i tuoi contatti: ti richiamiamo e ti mostriamo come funziona, senza impegno.</p>
+    <button type="button" class="btn btn-accent btn-caps" data-open-contact>Voglio essere ricontattato</button>
+  </div>
+</aside>
+
+<dialog id="contact-dialog" class="dlg" aria-labelledby="contact-title">
+  <button type="button" class="dlg-x" id="contact-close" aria-label="Chiudi">&times;</button>
+  <form class="form" id="contact-form" novalidate>
+    <h3 class="h3" id="contact-title">Vuoi GestAuto? Ti ricontattiamo noi.</h3>
+    <p class="intro">Lascia i tuoi dati: ti scrivo o ti chiamo per mostrarti GestAuto e capire se fa per il tuo autosalone. Nessun impegno.</p>
+    <div class="field"><label for="c-nome">Nome e cognome</label><input id="c-nome" name="nome" type="text" autocomplete="name" placeholder="Mario Rossi" required maxlength="120"></div>
+    <div class="field"><label for="c-salone">Nome dell'autosalone</label><input id="c-salone" name="salone" type="text" autocomplete="organization" placeholder="Autosalone Rossi" required maxlength="120"></div>
+    <div class="field-row">
+      <div class="field"><label for="c-email">Email di lavoro</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="mario@autosalone.it" required maxlength="160"></div>
+      <div class="field"><label for="c-tel">Telefono, facoltativo</label><input id="c-tel" name="telefono" type="tel" autocomplete="tel" placeholder="333 1234567" maxlength="40"></div>
+    </div>
+    <div class="hp" aria-hidden="true"><label for="c-sito">Lascia vuoto</label><input id="c-sito" name="sito" type="text" tabindex="-1" autocomplete="off"></div>
+    <label class="consent"><input type="checkbox" name="privacy" required><span>Ho letto l'<a href="/privacy">informativa sulla privacy</a> relativa alla gestione della mia richiesta.</span></label>
+    <p class="form-error" id="contact-error" role="alert"></p>
+    <button type="submit" class="btn btn-accent btn-block btn-caps" id="contact-submit">Invia la richiesta</button>
+  </form>
+  <div class="keys" id="contact-done" hidden tabindex="-1">
+    <h3 class="h3">Richiesta ricevuta. Grazie!</h3>
+    <p class="intro">Ti ricontatto io al più presto, di solito entro un giorno lavorativo.</p>
+    <button type="button" class="btn btn-ink btn-caps" id="contact-ok">Chiudi</button>
+  </div>
+</dialog>
+
 </main>
 
 <footer class="footer">

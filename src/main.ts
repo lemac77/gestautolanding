@@ -414,11 +414,72 @@ function initForm() {
   });
 }
 
+/* ---------- Banner contatto ---------- */
+function initContact() {
+  const dlg = document.getElementById("contact-dialog") as HTMLDialogElement | null;
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  if (!dlg || !form) return;
+  const error = $("contact-error");
+  const submit = $<HTMLButtonElement>("contact-submit");
+  const done = $("contact-done");
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  document.querySelectorAll("[data-open-contact]").forEach((b) =>
+    b.addEventListener("click", () => {
+      if (typeof dlg.showModal === "function") dlg.showModal();
+      else dlg.setAttribute("open", "");
+    })
+  );
+  const chiudi = () => dlg.close();
+  $("contact-close").addEventListener("click", chiudi);
+  $("contact-ok").addEventListener("click", chiudi);
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) chiudi(); });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const payload = {
+      nome: String(data.get("nome") || "").trim(),
+      salone: String(data.get("salone") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      telefono: String(data.get("telefono") || "").trim(),
+      privacy: data.get("privacy") === "on",
+      sito: String(data.get("sito") || ""),
+    };
+    let msg = "";
+    if (!payload.nome || !payload.salone) msg = "Inserisci nome e autosalone.";
+    else if (!emailRe.test(payload.email)) msg = "Controlla l'indirizzo email.";
+    else if (!payload.privacy) msg = "Per essere ricontattato devi confermare di aver letto l'informativa privacy.";
+    error.textContent = msg;
+    if (msg) return;
+
+    submit.disabled = true;
+    submit.textContent = "Invio in corso…";
+    try {
+      const res = await fetch("/api/richiesta-contatto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const out = await res.json().catch(() => ({ ok: false, error: "Risposta non valida dal server." }));
+      if (!res.ok || !out.ok) throw new Error(out.error || "Qualcosa è andato storto, riprova.");
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    } catch (err) {
+      error.textContent = err instanceof Error ? err.message : "Qualcosa è andato storto, riprova.";
+      submit.disabled = false;
+      submit.textContent = "Invia la richiesta";
+    }
+  });
+}
+
 initCalculator();
 initPricing();
 initViewer();
 initFaq();
 initForm();
+initContact();
 initUi();
 initShowcase();
 initHeroMotion();
