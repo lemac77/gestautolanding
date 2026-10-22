@@ -1,6 +1,10 @@
 // Interazioni della landing GestAuto: anteprime,
 // calcolatore, filtri del sito demo, FAQ e form di richiesta demo.
 import "./fonts";
+import { inject } from '@vercel/analytics';
+
+// Initialize Vercel Web Analytics
+inject({ mode: 'production' });
 
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
