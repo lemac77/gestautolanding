@@ -142,12 +142,12 @@ function initViewer() {
     liveBtn.setAttribute("aria-pressed", String(live));
     liveBtn.textContent = live ? "Torna alle schermate" : "Naviga dal vivo";
     frame.dataset.device = device;
-    url.textContent = "autosalonetest.it" + (info.path === "/" ? "" : info.path.replace(/\/0+-.*$/, "/volkswagen-golf"));
+    url.textContent = "sito.gestauto.me" + (info.path === "/" ? "" : info.path.replace(/\/0+-.*$/, "/volkswagen-golf"));
 
     if (live) {
       const iframe = el("iframe", {
         src: SITE + info.path,
-        title: "Sito demo Autosalone Test, navigabile",
+        title: "Sito demo Demo GestAuto, navigabile",
         loading: "lazy",
         referrerpolicy: "no-referrer",
       });
@@ -159,7 +159,7 @@ function initViewer() {
       src: `/sito/${device}-${page}.webp`,
       width: device === "desk" ? "1280" : "780",
       height: String(info.h[device]),
-      alt: `${info.label} del sito Autosalone Test, versione ${device === "desk" ? "desktop" : "smartphone"}`,
+      alt: `${info.label} del sito Demo GestAuto, versione ${device === "desk" ? "desktop" : "smartphone"}`,
       decoding: "async",
     });
     scroll.replaceChildren(img);
@@ -225,7 +225,7 @@ function initShowcase() {
   const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>(".show-tab"));
   const imgs = Array.from(root.querySelectorAll<HTMLImageElement>(".show-views img"));
   const url = $("show-url");
-  const URLS = ["gestionale · Autosalone Test", "gestionale · Autosalone Test · Vendite", "gestionale · Autosalone Test · Richieste", "gestionale · Autosalone Test · Trattative", "autosalonetest.it"];
+  const URLS = ["gestionale · Demo GestAuto", "gestionale · Demo GestAuto · Vendite", "gestionale · Demo GestAuto · Richieste", "gestionale · Demo GestAuto · Trattative", "sito.gestauto.me"];
   const DUR = 5500;
   let cur = 0;
   let timer = 0;

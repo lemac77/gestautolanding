@@ -1,6 +1,6 @@
 -- Tabella dei lead della landing GestAuto.
 -- Da eseguire nel SQL Editor del progetto Supabase che tiene i lead
--- (meglio NON quello della demo Autosalone Test, che si resetta ogni notte).
+-- (meglio NON quello della demo Demo GestAuto, che si resetta ogni notte).
 
 create table if not exists public.demo_leads (
   id          uuid primary key default gen_random_uuid(),
