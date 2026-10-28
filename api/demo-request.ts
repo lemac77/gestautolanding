@@ -53,7 +53,15 @@ const LIMITE_IP_ORA = 5; // richieste per IP in un'ora
 const LIMITE_GLOBALE_GIORNO = 300; // tetto di sicurezza su tutta la landing
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const origin = process.env.ALLOWED_ORIGIN || "https://gestauto.me";
+  // Origini ammesse: quella in ALLOWED_ORIGIN (anche più di una, separate da virgola, con o senza "/" finale)
+  // più gestauto.me e www.gestauto.me, così il form non si blocca se la variabile è scritta diversamente.
+  const ammesse = new Set(
+    [...(process.env.ALLOWED_ORIGIN || "").split(","), "https://gestauto.me", "https://www.gestauto.me"]
+      .map((o) => o.trim().replace(/\/+$/, "").toLowerCase())
+      .filter(Boolean)
+  );
+  const chiamante = (req.headers.origin || "").replace(/\/+$/, "").toLowerCase();
+  const origin = ammesse.has(chiamante) ? (req.headers.origin as string) : "https://gestauto.me";
   res.setHeader("Access-Control-Allow-Origin", origin);
   res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -62,8 +70,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).json({ ok: false, error: "Metodo non consentito" });
 
   // Il form parte solo dal nostro sito: se il browser dichiara un'altra origine, si ferma qui.
-  const chiamante = req.headers.origin;
-  if (chiamante && chiamante !== origin) return res.status(403).json({ ok: false, error: "Richiesta non consentita." });
+  if (chiamante && !ammesse.has(chiamante)) return res.status(403).json({ ok: false, error: "Richiesta non consentita." });
 
   let body: Record<string, unknown>;
   try {
